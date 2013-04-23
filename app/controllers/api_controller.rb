@@ -20,19 +20,24 @@ class ApiController < ApplicationController
     response[:status] = "ok"
     response[:type] = "commands"
 
+    latestCommand = Command.last
+
     commands = Array.new
     
     command = Hash.new
-    command[:robot_id] = '1'
-    command[:msg] = 'MS108'
 
-    commands << command
+    commands << latestCommand
+    
+    # command[:robot_id] = '1'
+    # command[:msg] = 'MS108'
 
-    command = Hash.new
-    command[:robot_id] = '1'
-    command[:msg] = 'MS109'
+    # commands << command
 
-    commands << command
+    # command = Hash.new
+    # command[:robot_id] = '1'
+    # command[:msg] = 'MS109'
+
+    # commands << command
 
     response[:data] = commands
     render json: response 
