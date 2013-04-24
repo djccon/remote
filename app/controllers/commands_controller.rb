@@ -41,6 +41,7 @@ class CommandsController < ApplicationController
   # POST /commands.json
   def create
     @command = Command.new(params[:command])
+    @command.processed = false
 
     respond_to do |format|
       if @command.save

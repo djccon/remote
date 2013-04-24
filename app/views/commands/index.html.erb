@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Cmd</th>
+    <th>Processed</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +12,7 @@
 <% @commands.each do |command| %>
   <tr>
     <td><%= command.cmd %></td>
+    <td><%= command.processed.to_s %></td>
     <td><%= link_to 'Show', command %></td>
     <td><%= link_to 'Edit', edit_command_path(command) %></td>
     <td><%= link_to 'Destroy', command, method: :delete, data: { confirm: 'Are you sure?' } %></td>

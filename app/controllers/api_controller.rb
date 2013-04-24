@@ -15,7 +15,8 @@ class ApiController < ApplicationController
   end
 
   def get_commands
-    # Get oldest command from unprocessed commands
+    # Get newest command from unprocessed commands
+
     response = Hash.new
     response[:status] = "ok"
     response[:type] = "commands"
@@ -23,21 +24,12 @@ class ApiController < ApplicationController
     latestCommand = Command.last
 
     commands = Array.new
-    
-    command = Hash.new
 
-    commands << latestCommand
-    
-    # command[:robot_id] = '1'
-    # command[:msg] = 'MS108'
-
-    # commands << command
-
-    # command = Hash.new
-    # command[:robot_id] = '1'
-    # command[:msg] = 'MS109'
-
-    # commands << command
+    if (!latestCommand.nil?)
+        if (!latestCommand.processed)
+            commands << latestCommand
+        end
+    end
 
     response[:data] = commands
     render json: response 
@@ -50,13 +42,13 @@ class ApiController < ApplicationController
     new_response = Response.new do |r|
         # fill in command_id, response text
         r.command_id = command.id
-        r.response = 'res111'
+        r.response = params[:response]
     end
     # save response
     new_response.save
 
     # mark command as processed
-    command.cmd += '!'
+    command.processed = true
     # save command
     command.save
     # return reponse object
