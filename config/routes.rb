@@ -11,8 +11,10 @@ Remote::Application.routes.draw do
 
   get "api/send_command"
   get "api/get_commands"
+  get "api/get_all_commands"
   get "api/send_response"
   get "api/get_responses"
+  get "api/get_all_responses"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

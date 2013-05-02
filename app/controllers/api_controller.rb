@@ -5,6 +5,7 @@ class ApiController < ApplicationController
 
     command = Command.new do |c|
       c.cmd = params[:cmd]
+      c.processed = false
     end
     command.save
 
@@ -30,6 +31,19 @@ class ApiController < ApplicationController
             commands << latestCommand
         end
     end
+
+    response[:data] = commands
+    render json: response 
+  end
+
+  def get_all_commands
+    response = Hash.new
+    response[:status] = "ok"
+    response[:type] = "commands"
+
+    #latestCommand = Command.find_all()
+
+    commands = Command.all
 
     response[:data] = commands
     render json: response 
@@ -77,6 +91,17 @@ class ApiController < ApplicationController
     response[:msg] = '>'
 
     responses << response
+
+    response[:data] = responses
+    render json: response 
+  end
+
+  def get_all_responses
+    response = Hash.new
+    response[:status] = "ok"
+    response[:type] = "responses"
+
+    responses = Response.all
 
     response[:data] = responses
     render json: response 
