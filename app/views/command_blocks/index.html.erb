@@ -1,0 +1,23 @@
+<h1>Listing command_blocks</h1>
+
+<table>
+  <tr>
+    <th>Commands</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @command_blocks.each do |command_block| %>
+  <tr>
+    <td><%= command_block.commands %></td>
+    <td><%= link_to 'Show', command_block %></td>
+    <td><%= link_to 'Edit', edit_command_block_path(command_block) %></td>
+    <td><%= link_to 'Destroy', command_block, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Command block', new_command_block_path %>

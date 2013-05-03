@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423170950) do
+ActiveRecord::Schema.define(:version => 20130503023308) do
+
+  create_table "command_blocks", :force => true do |t|
+    t.string   "commands"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "commands", :force => true do |t|
     t.string   "cmd"

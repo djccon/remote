@@ -107,4 +107,26 @@ class ApiController < ApplicationController
     render json: response 
   end
 
+  def push_command_block
+    response = Hash.new
+    command_block_id = params[:cmd]
+    
+    if (!command_block_id.nil?)
+
+        command_block = CommandBlock.find_by_id(command_block_id)
+        if (!command_block.nil?)
+            command = Command.new do |c|
+              c.cmd = command_block.commands
+              c.processed = false
+            end
+            command.save
+        end
+    end
+
+    response[:status] = 'ok'
+    response[:data] = command
+
+    render json: response 
+  end
+
 end

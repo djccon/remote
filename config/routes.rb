@@ -1,4 +1,7 @@
 Remote::Application.routes.draw do
+  resources :command_blocks
+
+
   resources :responses
 
 
@@ -6,7 +9,6 @@ Remote::Application.routes.draw do
 
 
   get "test/send_command"
-
   get "test/get_commands"
 
   get "api/send_command"
@@ -15,6 +17,8 @@ Remote::Application.routes.draw do
   get "api/send_response"
   get "api/get_responses"
   get "api/get_all_responses"
+  get "api/push_command_block"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
