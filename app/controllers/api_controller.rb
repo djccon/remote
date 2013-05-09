@@ -129,4 +129,34 @@ class ApiController < ApplicationController
     render json: response 
   end
 
+  def send_swing_command    
+    response = Hash.new
+
+    power = params[:power]
+    direction = params[:direction]
+
+    # AL10050,AR52|AL305,AR62|TR52|TR62|MS105
+    new_command = ""
+    
+    if (!power.nil? || !direction.nil?)
+        
+        new_command += "AL" + direction + ",AR52|" 
+        new_command += "AL" + power + ",AR62|" 
+        new_command += "TR52|TR62|MS105" 
+
+        command = Command.new do |c|
+          c.cmd = new_command
+          c.processed = false
+        end
+        
+        command.save
+
+    end
+
+    response[:status] = 'ok'
+    response[:data] = command
+
+    render json: response 
+  end
+
 end
