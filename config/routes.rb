@@ -18,7 +18,9 @@ Remote::Application.routes.draw do
   get "api/get_responses"
   get "api/get_all_responses"
   get "api/push_command_block"
-  get "api/send_swing_command"
+  post "api/send_swing_command"
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
