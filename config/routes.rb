@@ -32,11 +32,11 @@ Remote::Application.routes.draw do
   get "api/push_command_block"
   post "api/mimic_params"
 
-  post "api/send_swing_command"
+  get "api/send_swing_command"
   post "api/send_shot_launch_conditions"
   post "api/create_shot"
 
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
