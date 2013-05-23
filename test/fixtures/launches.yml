@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  club_speed: 1.5
+  ball_speed: 1.5
+  smash_factor: 1.5
+  ball_horizontal_angle: 1.5
+  ball_vertical_angle: 1.5
+  dynamic_loft: 1.5
+  face_angle: 1.5
+  spin_rate: 1.5
+  spin_axis_horizontal: 1.5
+  spin_axis_vertical: 1.5
+  club_path: 1.5
+  attack_angle: 1.5
+  swing_plane_horizontal: 1.5
+  swing_plane_vertical: 1.5
+
+two:
+  club_speed: 1.5
+  ball_speed: 1.5
+  smash_factor: 1.5
+  ball_horizontal_angle: 1.5
+  ball_vertical_angle: 1.5
+  dynamic_loft: 1.5
+  face_angle: 1.5
+  spin_rate: 1.5
+  spin_axis_horizontal: 1.5
+  spin_axis_vertical: 1.5
+  club_path: 1.5
+  attack_angle: 1.5
+  swing_plane_horizontal: 1.5
+  swing_plane_vertical: 1.5

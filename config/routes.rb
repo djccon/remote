@@ -1,4 +1,16 @@
 Remote::Application.routes.draw do
+  resources :ball_landings
+
+
+  resources :launch_items
+
+
+  resources :launches
+
+
+  resources :shots
+
+
   resources :command_blocks
 
 
@@ -18,10 +30,13 @@ Remote::Application.routes.draw do
   get "api/get_responses"
   get "api/get_all_responses"
   get "api/push_command_block"
+  post "api/mimic_params"
+
   post "api/send_swing_command"
+  post "api/send_shot_launch_conditions"
+  post "api/create_shot"
 
-
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

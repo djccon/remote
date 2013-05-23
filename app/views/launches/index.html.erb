@@ -1,0 +1,49 @@
+<h1>Listing launches</h1>
+
+<table>
+  <tr>
+    <th>Club speed</th>
+    <th>Ball speed</th>
+    <th>Smash factor</th>
+    <th>Ball horizontal angle</th>
+    <th>Ball vertical angle</th>
+    <th>Dynamic loft</th>
+    <th>Face angle</th>
+    <th>Spin rate</th>
+    <th>Spin axis horizontal</th>
+    <th>Spin axis vertical</th>
+    <th>Club path</th>
+    <th>Attack angle</th>
+    <th>Swing plane horizontal</th>
+    <th>Swing plane vertical</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @launches.each do |launch| %>
+  <tr>
+    <td><%= launch.club_speed %></td>
+    <td><%= launch.ball_speed %></td>
+    <td><%= launch.smash_factor %></td>
+    <td><%= launch.ball_horizontal_angle %></td>
+    <td><%= launch.ball_vertical_angle %></td>
+    <td><%= launch.dynamic_loft %></td>
+    <td><%= launch.face_angle %></td>
+    <td><%= launch.spin_rate %></td>
+    <td><%= launch.spin_axis_horizontal %></td>
+    <td><%= launch.spin_axis_vertical %></td>
+    <td><%= launch.club_path %></td>
+    <td><%= launch.attack_angle %></td>
+    <td><%= launch.swing_plane_horizontal %></td>
+    <td><%= launch.swing_plane_vertical %></td>
+    <td><%= link_to 'Show', launch %></td>
+    <td><%= link_to 'Edit', edit_launch_path(launch) %></td>
+    <td><%= link_to 'Destroy', launch, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Launch', new_launch_path %>

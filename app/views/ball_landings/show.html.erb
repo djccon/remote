@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Valid:</b>
+  <%= @ball_landing.valid %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @ball_landing.time %>
+</p>
+
+<p>
+  <b>X:</b>
+  <%= @ball_landing.x %>
+</p>
+
+<p>
+  <b>Y:</b>
+  <%= @ball_landing.y %>
+</p>
+
+<p>
+  <b>Z:</b>
+  <%= @ball_landing.z %>
+</p>
+
+<p>
+  <b>Carry:</b>
+  <%= @ball_landing.carry %>
+</p>
+
+<p>
+  <b>Side:</b>
+  <%= @ball_landing.side %>
+</p>
+
+<p>
+  <b>Vertical angle:</b>
+  <%= @ball_landing.vertical_angle %>
+</p>
+
+<p>
+  <b>Horizontal angle:</b>
+  <%= @ball_landing.horizontal_angle %>
+</p>
+
+<p>
+  <b>Speed:</b>
+  <%= @ball_landing.speed %>
+</p>
+
+
+<%= link_to 'Edit', edit_ball_landing_path(@ball_landing) %> |
+<%= link_to 'Back', ball_landings_path %>

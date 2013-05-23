@@ -159,4 +159,67 @@ class ApiController < ApplicationController
     render json: response 
   end
 
+  def mimic_params
+    response = Hash.new
+
+    response[:data] = params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
+  def send_shot_launch_conditions    
+
+    #try the bulk create using actual_params. Have to deal with the valid variable first though.
+
+    response = Hash.new
+    json_payload = params[:launch]
+    actual_params = JSON.parse(json_payload)
+
+    launch = Launch.new do |l|
+        l.club_speed = actual_params["club_speed"].to_f
+        l.ball_speed = actual_params["ball_speed"].to_f
+        l.smash_factor = actual_params["smash_factor"].to_f
+        l.ball_horizontal_angle = actual_params["ball_horizontal_angle"].to_f
+        l.ball_vertical_angle = actual_params["ball_vertical_angle"].to_f
+        l.dynamic_loft = actual_params["dynamic_loft"].to_f
+        l.face_angle = actual_params["face_angle"].to_f
+        l.spin_rate = actual_params["spin_rate"].to_f
+        l.spin_axis_horizontal = actual_params["spin_axis_horizontal"].to_f
+        l.spin_axis_vertical = actual_params["spin_axis_vertical"].to_f
+        l.club_path = actual_params["club_path"].to_f
+        l.attack_angle = actual_params["attack_angle"].to_f
+        l.swing_plane_horizontal = actual_params["swing_plane_horizontal"].to_f
+        l.swing_plane_vertical = actual_params["swing_plane_vertical"].to_f
+    end
+    launch.save
+
+    shot_id = params[:shot_id]
+
+    launch_item = LaunchItem.new do |li|
+        li.shot_id = shot_id.to_i
+        li.launch_id = launch.id
+    end
+    launch_item.save
+
+    response[:launch] = launch
+    response[:shot_id] = shot_id
+    response[:launch_item] = launch_item
+    # response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
+  def create_shot
+    response = Hash.new
+    shot = Shot.new
+    shot.save
+    response[:shot] = shot
+    render json: shot  
+  end
+
+
 end

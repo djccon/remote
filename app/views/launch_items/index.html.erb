@@ -1,0 +1,25 @@
+<h1>Listing launch_items</h1>
+
+<table>
+  <tr>
+    <th>Shot</th>
+    <th>Launch</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @launch_items.each do |launch_item| %>
+  <tr>
+    <td><%= launch_item.shot_id %></td>
+    <td><%= launch_item.launch_id %></td>
+    <td><%= link_to 'Show', launch_item %></td>
+    <td><%= link_to 'Edit', edit_launch_item_path(launch_item) %></td>
+    <td><%= link_to 'Destroy', launch_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Launch item', new_launch_item_path %>

@@ -1,0 +1,2 @@
+module LaunchItemsHelper
+end

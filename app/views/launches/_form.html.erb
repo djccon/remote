@@ -1,0 +1,73 @@
+<%= form_for(@launch) do |f| %>
+  <% if @launch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@launch.errors.count, "error") %> prohibited this launch from being saved:</h2>
+
+      <ul>
+      <% @launch.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :club_speed %><br />
+    <%= f.text_field :club_speed %>
+  </div>
+  <div class="field">
+    <%= f.label :ball_speed %><br />
+    <%= f.text_field :ball_speed %>
+  </div>
+  <div class="field">
+    <%= f.label :smash_factor %><br />
+    <%= f.text_field :smash_factor %>
+  </div>
+  <div class="field">
+    <%= f.label :ball_horizontal_angle %><br />
+    <%= f.text_field :ball_horizontal_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :ball_vertical_angle %><br />
+    <%= f.text_field :ball_vertical_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :dynamic_loft %><br />
+    <%= f.text_field :dynamic_loft %>
+  </div>
+  <div class="field">
+    <%= f.label :face_angle %><br />
+    <%= f.text_field :face_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :spin_rate %><br />
+    <%= f.text_field :spin_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :spin_axis_horizontal %><br />
+    <%= f.text_field :spin_axis_horizontal %>
+  </div>
+  <div class="field">
+    <%= f.label :spin_axis_vertical %><br />
+    <%= f.text_field :spin_axis_vertical %>
+  </div>
+  <div class="field">
+    <%= f.label :club_path %><br />
+    <%= f.text_field :club_path %>
+  </div>
+  <div class="field">
+    <%= f.label :attack_angle %><br />
+    <%= f.text_field :attack_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :swing_plane_horizontal %><br />
+    <%= f.text_field :swing_plane_horizontal %>
+  </div>
+  <div class="field">
+    <%= f.label :swing_plane_vertical %><br />
+    <%= f.text_field :swing_plane_vertical %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

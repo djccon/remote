@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Shot:</b>
+  <%= @launch_item.shot_id %>
+</p>
+
+<p>
+  <b>Launch:</b>
+  <%= @launch_item.launch_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_launch_item_path(@launch_item) %> |
+<%= link_to 'Back', launch_items_path %>

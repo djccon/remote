@@ -1,0 +1,41 @@
+<h1>Listing ball_landings</h1>
+
+<table>
+  <tr>
+    <th>Valid</th>
+    <th>Time</th>
+    <th>X</th>
+    <th>Y</th>
+    <th>Z</th>
+    <th>Carry</th>
+    <th>Side</th>
+    <th>Vertical angle</th>
+    <th>Horizontal angle</th>
+    <th>Speed</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ball_landings.each do |ball_landing| %>
+  <tr>
+    <td><%= ball_landing.valid %></td>
+    <td><%= ball_landing.time %></td>
+    <td><%= ball_landing.x %></td>
+    <td><%= ball_landing.y %></td>
+    <td><%= ball_landing.z %></td>
+    <td><%= ball_landing.carry %></td>
+    <td><%= ball_landing.side %></td>
+    <td><%= ball_landing.vertical_angle %></td>
+    <td><%= ball_landing.horizontal_angle %></td>
+    <td><%= ball_landing.speed %></td>
+    <td><%= link_to 'Show', ball_landing %></td>
+    <td><%= link_to 'Edit', edit_ball_landing_path(ball_landing) %></td>
+    <td><%= link_to 'Destroy', ball_landing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ball landing', new_ball_landing_path %>

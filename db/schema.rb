@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503023308) do
+ActiveRecord::Schema.define(:version => 20130523031724) do
+
+  create_table "ball_landings", :force => true do |t|
+    t.boolean  "valid"
+    t.float    "time"
+    t.float    "x"
+    t.float    "y"
+    t.float    "z"
+    t.float    "carry"
+    t.float    "side"
+    t.float    "vertical_angle"
+    t.float    "horizontal_angle"
+    t.float    "speed"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "command_blocks", :force => true do |t|
     t.string   "commands"
@@ -26,9 +41,40 @@ ActiveRecord::Schema.define(:version => 20130503023308) do
     t.boolean  "processed"
   end
 
+  create_table "launch_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "launch_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "launches", :force => true do |t|
+    t.float    "club_speed"
+    t.float    "ball_speed"
+    t.float    "smash_factor"
+    t.float    "ball_horizontal_angle"
+    t.float    "ball_vertical_angle"
+    t.float    "dynamic_loft"
+    t.float    "face_angle"
+    t.float    "spin_rate"
+    t.float    "spin_axis_horizontal"
+    t.float    "spin_axis_vertical"
+    t.float    "club_path"
+    t.float    "attack_angle"
+    t.float    "swing_plane_horizontal"
+    t.float    "swing_plane_vertical"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
   create_table "responses", :force => true do |t|
     t.integer  "command_id"
     t.string   "response"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "shots", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -1,0 +1,57 @@
+<%= form_for(@ball_landing) do |f| %>
+  <% if @ball_landing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ball_landing.errors.count, "error") %> prohibited this ball_landing from being saved:</h2>
+
+      <ul>
+      <% @ball_landing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :valid %><br />
+    <%= f.check_box :valid %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br />
+    <%= f.text_field :time %>
+  </div>
+  <div class="field">
+    <%= f.label :x %><br />
+    <%= f.text_field :x %>
+  </div>
+  <div class="field">
+    <%= f.label :y %><br />
+    <%= f.text_field :y %>
+  </div>
+  <div class="field">
+    <%= f.label :z %><br />
+    <%= f.text_field :z %>
+  </div>
+  <div class="field">
+    <%= f.label :carry %><br />
+    <%= f.text_field :carry %>
+  </div>
+  <div class="field">
+    <%= f.label :side %><br />
+    <%= f.text_field :side %>
+  </div>
+  <div class="field">
+    <%= f.label :vertical_angle %><br />
+    <%= f.text_field :vertical_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :horizontal_angle %><br />
+    <%= f.text_field :horizontal_angle %>
+  </div>
+  <div class="field">
+    <%= f.label :speed %><br />
+    <%= f.text_field :speed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
