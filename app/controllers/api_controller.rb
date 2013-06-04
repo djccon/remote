@@ -213,12 +213,69 @@ class ApiController < ApplicationController
   end
 
 
+  def send_shot_ball_landing
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    #actual_params = params
+
+    landing = BallLanding.new do |obj|
+        obj.time = actual_params["time"].to_f
+        obj.x = actual_params["x"].to_f
+        obj.y = actual_params["y"].to_f
+        obj.z = actual_params["z"].to_f
+        obj.carry = actual_params["carry"].to_f
+        obj.side = actual_params["side"].to_f
+        obj.speed = actual_params["speed"].to_f
+        obj.vertical_angle = actual_params["vertical_angle"].to_f
+        obj.horizontal_angle = actual_params["horizontal_angle"].to_f
+    end
+    landing.save
+
+    shot_id = params[:shot_id]
+
+    ball_landing_item = BallLandingItem.new do |item|
+        item.shot_id = shot_id.to_i
+        item.ball_landing_id = landing.id
+    end
+    ball_landing_item.save
+
+    response[:shot_id] = shot_id
+    response[:ball_landing] = landing
+    response[:ball_landing_item] = ball_landing_item
+    
+    response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
   def create_shot
     response = Hash.new
     shot = Shot.new
     shot.save
     response[:shot] = shot
     render json: shot  
+  end
+
+
+  def output_debug_string
+    response = Hash.new
+    json_payload = params[:payload]
+    #actual_params = JSON.parse(json_payload)
+    actual_params = params
+
+    outputDebugString = DebugOutput.new do |obj|
+        obj.title = actual_params["title"]
+        obj.detail = actual_params["detail"]
+    end
+    outputDebugString.save
+
+    response[:status] = 'ok';
+    render json: response  
   end
 
 

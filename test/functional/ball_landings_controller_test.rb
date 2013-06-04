@@ -18,7 +18,7 @@ class BallLandingsControllerTest < ActionController::TestCase
 
   test "should create ball_landing" do
     assert_difference('BallLanding.count') do
-      post :create, ball_landing: { carry: @ball_landing.carry, horizontal_angle: @ball_landing.horizontal_angle, side: @ball_landing.side, speed: @ball_landing.speed, time: @ball_landing.time, valid: @ball_landing.valid, vertical_angle: @ball_landing.vertical_angle, x: @ball_landing.x, y: @ball_landing.y, z: @ball_landing.z }
+      post :create, ball_landing: { carry: @ball_landing.carry, horizontal_angle: @ball_landing.horizontal_angle, side: @ball_landing.side, speed: @ball_landing.speed, time: @ball_landing.time, vertical_angle: @ball_landing.vertical_angle, x: @ball_landing.x, y: @ball_landing.y, z: @ball_landing.z }
     end
 
     assert_redirected_to ball_landing_path(assigns(:ball_landing))

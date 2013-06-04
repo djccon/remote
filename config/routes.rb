@@ -1,4 +1,10 @@
 Remote::Application.routes.draw do
+  resources :ball_landing_items
+
+
+  resources :debug_outputs
+
+
   resources :ball_landings
 
 
@@ -30,10 +36,14 @@ Remote::Application.routes.draw do
   get "api/get_responses"
   get "api/get_all_responses"
   get "api/push_command_block"
+  post "api/output_debug_string"
+
   post "api/mimic_params"
 
   get "api/send_swing_command"
+  
   post "api/send_shot_launch_conditions"
+  post "api/send_shot_ball_landing"
   post "api/create_shot"
 
 

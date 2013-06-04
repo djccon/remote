@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @debug_output.title %>
+</p>
+
+<p>
+  <b>Detail:</b>
+  <%= @debug_output.detail %>
+</p>
+
+
+<%= link_to 'Edit', edit_debug_output_path(@debug_output) %> |
+<%= link_to 'Back', debug_outputs_path %>

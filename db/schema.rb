@@ -11,10 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523031724) do
+ActiveRecord::Schema.define(:version => 20130523235904) do
+
+  create_table "ball_landing_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "ball_landing_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "ball_landings", :force => true do |t|
-    t.boolean  "valid"
     t.float    "time"
     t.float    "x"
     t.float    "y"
@@ -39,6 +45,13 @@ ActiveRecord::Schema.define(:version => 20130523031724) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.boolean  "processed"
+  end
+
+  create_table "debug_outputs", :force => true do |t|
+    t.string   "title"
+    t.text     "detail"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "launch_items", :force => true do |t|

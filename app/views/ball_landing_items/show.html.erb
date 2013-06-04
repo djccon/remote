@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Shot:</b>
+  <%= @ball_landing_item.shot_id %>
+</p>
+
+<p>
+  <b>Ball landing:</b>
+  <%= @ball_landing_item.ball_landing_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_ball_landing_item_path(@ball_landing_item) %> |
+<%= link_to 'Back', ball_landing_items_path %>

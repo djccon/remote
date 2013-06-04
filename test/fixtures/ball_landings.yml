@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  valid: false
   time: 1.5
   x: 1.5
   'y': 1.5
@@ -13,7 +12,6 @@ one:
   speed: 1.5
 
 two:
-  valid: false
   time: 1.5
   x: 1.5
   'y': 1.5

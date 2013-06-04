@@ -24,9 +24,20 @@ class ShotsController < ApplicationController
       launches << launch
     end 
 
+    ball_landing_items = @shot.ball_landing_items
+    results[:num_ball_landing_items] = ball_landing_items.length
+
+    ball_landings = Array.new
+    ball_landing_items.each do |item|
+      ball_landing = BallLanding.find(item.ball_landing_id)
+      ball_landings << ball_landing
+    end 
+
     results[:shot] = @shot
     results[:launch_items] = launch_items
     results[:launches] = launches
+    results[:ball_landing_items] = ball_landing_items
+    results[:ball_landings] = ball_landings
 
     respond_to do |format|
       format.html # show.html.erb
