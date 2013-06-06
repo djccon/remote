@@ -1,4 +1,7 @@
 Remote::Application.routes.draw do
+  resources :command_items
+
+
   resources :ball_landing_items
 
 

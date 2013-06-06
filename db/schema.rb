@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523235904) do
+ActiveRecord::Schema.define(:version => 20130606155227) do
 
   create_table "ball_landing_items", :force => true do |t|
     t.integer  "shot_id"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(:version => 20130523235904) do
 
   create_table "command_blocks", :force => true do |t|
     t.string   "commands"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "command_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "command_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

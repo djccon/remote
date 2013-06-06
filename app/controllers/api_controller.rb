@@ -255,10 +255,29 @@ class ApiController < ApplicationController
 
   def create_shot
     response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = params
+
     shot = Shot.new
     shot.save
+
     response[:shot] = shot
-    render json: shot  
+
+    command_id = actual_params[:command_id]
+    
+    logger.debug ">>>>>>> command_id " + command_id
+    logger.debug ">>>>>>> shot_id " + shot.id.to_s
+
+    if(!command_id.nil?)
+        command_item = CommandItem.new do |item|
+            item.shot_id = shot.id
+            item.command_id = command_id
+        end
+        command_item.save
+    end
+
+    render json: shot
   end
 
 
