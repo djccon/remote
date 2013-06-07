@@ -1,0 +1,25 @@
+<%= form_for(@ball_flight_item) do |f| %>
+  <% if @ball_flight_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ball_flight_item.errors.count, "error") %> prohibited this ball_flight_item from being saved:</h2>
+
+      <ul>
+      <% @ball_flight_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :shot_id %><br />
+    <%= f.number_field :shot_id %>
+  </div>
+  <div class="field">
+    <%= f.label :ball_flight_id %><br />
+    <%= f.number_field :ball_flight_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

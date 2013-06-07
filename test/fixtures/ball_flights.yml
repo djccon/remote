@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_measurement_time: 1.5
+  last_measurement_time: 1.5
+  positions: MyText
+
+two:
+  first_measurement_time: 1.5
+  last_measurement_time: 1.5
+  positions: MyText

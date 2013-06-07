@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First measurement time:</b>
+  <%= @club_path.first_measurement_time %>
+</p>
+
+<p>
+  <b>Last measurement time:</b>
+  <%= @club_path.last_measurement_time %>
+</p>
+
+<p>
+  <b>Positions:</b>
+  <%= @club_path.positions %>
+</p>
+
+
+<%= link_to 'Edit', edit_club_path_path(@club_path) %> |
+<%= link_to 'Back', club_paths_path %>

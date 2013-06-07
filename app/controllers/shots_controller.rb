@@ -39,6 +39,28 @@ class ShotsController < ApplicationController
       ball_landings << ball_landing
     end 
 
+    # Collect all ball_flight items
+
+    ball_flight_items = @shot.ball_flight_items
+    results[:num_ball_flight_items] = ball_flight_items.length
+
+    ball_flights = Array.new
+    ball_flight_items.each do |item|
+      ball_flight = BallFlight.find(item.ball_flight_id)
+      ball_flights << ball_flight
+    end 
+
+    # Collect all club_path items
+
+    club_path_items = @shot.club_path_items
+    results[:num_club_path_items] = club_path_items.length
+
+    club_paths = Array.new
+    club_path_items.each do |item|
+      club_path = ClubPath.find(item.club_path_id)
+      club_paths << club_path
+    end 
+
     # Collect all the command items
 
     command_items = @shot.command_items
@@ -53,6 +75,18 @@ class ShotsController < ApplicationController
       commands << command
     end 
 
+    # Collect all the weather items
+
+    weather_items = @shot.weather_items
+
+    results[:num_weather_items] = weather_items.length
+
+    weathers = Array.new
+    weather_items.each do |item|
+      weather = Weather.find(item.weather_id)
+      weathers << weather
+    end 
+
     # Package up the results
 
     results[:shot] = @shot
@@ -60,7 +94,10 @@ class ShotsController < ApplicationController
     results[:launches] = launches
     results[:ball_landing_items] = ball_landing_items
     results[:ball_landings] = ball_landings
+    results[:ball_flights] = ball_flights
+    results[:club_paths] = club_paths
     results[:commands] = commands
+    results[:weathers] = weathers
 
     respond_to do |format|
       format.html # show.html.erb

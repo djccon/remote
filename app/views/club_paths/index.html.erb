@@ -1,0 +1,27 @@
+<h1>Listing club_paths</h1>
+
+<table>
+  <tr>
+    <th>First measurement time</th>
+    <th>Last measurement time</th>
+    <th>Positions</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @club_paths.each do |club_path| %>
+  <tr>
+    <td><%= club_path.first_measurement_time %></td>
+    <td><%= club_path.last_measurement_time %></td>
+    <td><%= club_path.positions %></td>
+    <td><%= link_to 'Show', club_path %></td>
+    <td><%= link_to 'Edit', edit_club_path_path(club_path) %></td>
+    <td><%= link_to 'Destroy', club_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Club path', new_club_path_path %>

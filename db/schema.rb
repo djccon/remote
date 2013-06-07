@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130606155227) do
+ActiveRecord::Schema.define(:version => 20130607033309) do
+
+  create_table "ball_flight_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "ball_flight_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "ball_flights", :force => true do |t|
+    t.float    "first_measurement_time"
+    t.float    "last_measurement_time"
+    t.text     "positions"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
 
   create_table "ball_landing_items", :force => true do |t|
     t.integer  "shot_id"
@@ -32,6 +47,21 @@ ActiveRecord::Schema.define(:version => 20130606155227) do
     t.float    "speed"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "club_path_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "club_path_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "club_paths", :force => true do |t|
+    t.float    "first_measurement_time"
+    t.float    "last_measurement_time"
+    t.text     "positions"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "command_blocks", :force => true do |t|
@@ -97,6 +127,21 @@ ActiveRecord::Schema.define(:version => 20130606155227) do
   create_table "shots", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "weather_items", :force => true do |t|
+    t.integer  "shot_id"
+    t.integer  "weather_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "weathers", :force => true do |t|
+    t.float    "wind_speed"
+    t.float    "wind_direction"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "weather_type"
   end
 
 end

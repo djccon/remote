@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First measurement time:</b>
+  <%= @ball_flight.first_measurement_time %>
+</p>
+
+<p>
+  <b>Last measurement time:</b>
+  <%= @ball_flight.last_measurement_time %>
+</p>
+
+<p>
+  <b>Positions:</b>
+  <%= @ball_flight.positions %>
+</p>
+
+
+<%= link_to 'Edit', edit_ball_flight_path(@ball_flight) %> |
+<%= link_to 'Back', ball_flights_path %>

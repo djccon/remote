@@ -253,6 +253,127 @@ class ApiController < ApplicationController
   end
 
 
+  def send_shot_ball_flight
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    #actual_params = params
+
+    flight = BallFlight.new do |obj|
+        obj.first_measurement_time = actual_params["first_measurement_time"].to_f
+        obj.last_measurement_time = actual_params["last_measurement_time"].to_f
+        obj.positions = actual_params["positions"].to_s
+    end
+    flight.save
+
+    shot_id = params[:shot_id]
+
+    ball_flight_item = BallFlightItem.new do |item|
+        item.shot_id = shot_id.to_i
+        item.ball_flight_id = flight.id
+    end
+    ball_flight_item.save
+
+    response[:shot_id] = shot_id
+    response[:ball_flight] = flight
+    response[:ball_flight_item] = ball_flight_item
+    
+    response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
+  def send_shot_club_path
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    club_path = ClubPath.new do |obj|
+        obj.first_measurement_time = actual_params["first_measurement_time"].to_f
+        obj.last_measurement_time = actual_params["last_measurement_time"].to_f
+        obj.positions = actual_params["positions"].to_s
+    end
+    club_path.save
+
+    shot_id = params[:shot_id]
+
+    club_path_item = ClubPathItem.new do |item|
+        item.shot_id = shot_id.to_i
+        item.club_path_id = club_path.id
+    end
+    club_path_item.save
+
+    response[:shot_id] = shot_id
+    response[:club_path] = club_path
+    response[:club_path_item] = club_path_item
+    
+    response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
+  def send_shot_weather
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    #actual_params = params
+
+    weather = Weather.new do |obj|
+        obj.wind_speed = actual_params["wind_speed"].to_f
+        obj.wind_direction = actual_params["wind_direction"].to_f
+        obj.weather_type = "shot"
+    end
+    weather.save
+
+    shot_id = params[:shot_id]
+
+    weather_item = WeatherItem.new do |item|
+        item.shot_id = shot_id.to_i
+        item.weather_id = weather.id
+    end
+    weather_item.save
+
+    response[:shot_id] = shot_id
+    response[:weather] = weather
+    response[:weather_item] = weather_item
+    
+    response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
+  def send_weather
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    weather = Weather.new do |obj|
+        obj.wind_speed = actual_params["wind_speed"].to_f
+        obj.wind_direction = actual_params["wind_direction"].to_f
+        obj.weather_type = "periodic"
+    end
+    weather.save
+
+    response[:weather] = weather
+    response[:params] = actual_params
+    response[:status] = 'ok'
+
+    render json: response 
+  end
+
+
   def create_shot
     response = Hash.new
 
@@ -269,7 +390,15 @@ class ApiController < ApplicationController
     logger.debug ">>>>>>> command_id " + command_id
     logger.debug ">>>>>>> shot_id " + shot.id.to_s
 
-    if(!command_id.nil?)
+    begin
+        command = Command.find(command_id)
+    rescue => e
+        response[:error] = "Exception: #{e}"
+        render json: response
+        return
+    end
+
+    if(!command.nil?)
         command_item = CommandItem.new do |item|
             item.shot_id = shot.id
             item.command_id = command_id

@@ -1,4 +1,22 @@
 Remote::Application.routes.draw do
+  resources :club_path_items
+
+
+  resources :club_paths
+
+
+  resources :ball_flight_items
+
+
+  resources :ball_flights
+
+
+  resources :weather_items
+
+
+  resources :weathers
+
+
   resources :command_items
 
 
@@ -47,6 +65,10 @@ Remote::Application.routes.draw do
   
   post "api/send_shot_launch_conditions"
   post "api/send_shot_ball_landing"
+  post "api/send_shot_weather"
+  post "api/send_shot_ball_flight"
+  post "api/send_shot_club_path"
+  post "api/send_weather"
   post "api/create_shot"
 
 

@@ -1,0 +1,27 @@
+<h1>Listing ball_flights</h1>
+
+<table>
+  <tr>
+    <th>First measurement time</th>
+    <th>Last measurement time</th>
+    <th>Positions</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ball_flights.each do |ball_flight| %>
+  <tr>
+    <td><%= ball_flight.first_measurement_time %></td>
+    <td><%= ball_flight.last_measurement_time %></td>
+    <td><%= ball_flight.positions %></td>
+    <td><%= link_to 'Show', ball_flight %></td>
+    <td><%= link_to 'Edit', edit_ball_flight_path(ball_flight) %></td>
+    <td><%= link_to 'Destroy', ball_flight, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ball flight', new_ball_flight_path %>

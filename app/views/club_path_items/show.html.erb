@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Shot:</b>
+  <%= @club_path_item.shot_id %>
+</p>
+
+<p>
+  <b>Club path:</b>
+  <%= @club_path_item.club_path_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_club_path_item_path(@club_path_item) %> |
+<%= link_to 'Back', club_path_items_path %>

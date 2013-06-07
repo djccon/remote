@@ -1,0 +1,29 @@
+<%= form_for(@club_path) do |f| %>
+  <% if @club_path.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@club_path.errors.count, "error") %> prohibited this club_path from being saved:</h2>
+
+      <ul>
+      <% @club_path.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_measurement_time %><br />
+    <%= f.text_field :first_measurement_time %>
+  </div>
+  <div class="field">
+    <%= f.label :last_measurement_time %><br />
+    <%= f.text_field :last_measurement_time %>
+  </div>
+  <div class="field">
+    <%= f.label :positions %><br />
+    <%= f.text_area :positions %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
