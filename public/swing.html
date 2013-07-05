@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+
+div
+{
+	transition: transform 0s;
+	-moz-transition: transform 0s; /* Firefox 4 */
+	-webkit-transition: transform 0s; /* Safari and Chrome */
+	-o-transition: transform 0s; /* Opera */
+}
+
+div:hover
+{
+width:300px;
+}
+
+
+#divFrame
+{
+	position: relative;
+	height: 500px;
+	width: 500px;
+	margin: 100px;
+	padding:10px;
+	border: 1px solid black;
+}
+
+#divBall
+{
+	position: absolute;
+	background-color: white;
+	height: 10px;
+	width: 10px;
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid black;
+	-moz-transform: translate(90px, 330px); 
+}
+
+#divClub
+{
+	background-image: url('images/iron_left_cropped_small.jpg'); 
+	padding:0px;
+	position: absolute;
+	border: 0px solid black;
+	background-color: red;
+	height: 195px;
+	width: 25px;
+
+	-moz-transform: translate(90px, 150px) rotate(0deg); 
+	-moz-transform-origin:75% 0%; 
+}
+
+
+</style>
+
+<script>
+	var count = 0;
+	var timerID = 0;
+	var isSwinging = false;
+	var doingBackswing = false;
+	var doingDownswing = false;
+	var power = 0;
+	var direction = 0;
+	
+	function startSwing()
+	{
+		isSwinging = true;
+		doingBackswing = true;
+		timerID = setInterval ( "onTimer()", 10 );
+	}
+
+	// Click top of backswing
+	function registerPower()
+	{
+		if (!isSwinging)
+		{
+			return;
+		}
+		
+		if (!doingBackswing)
+		{
+			return;
+		}
+		
+		power = count;
+		
+		doingBackswing = false;
+		doingDownswing = true;
+	}
+
+	function registerDirection()
+	{
+		if (!isSwinging)
+		{
+			return;
+		}
+		
+		if (!doingDownswing)
+		{
+			return;
+		}
+		
+		clearTimeout(timerID);
+		
+		doingBackswing = false;
+		doingDownswing = false;
+		isSwinging = false;
+		
+		direction = count;
+		
+		//alert('Direction registered')
+		
+		sendCommandToServer();
+	}
+
+	function sendCommandToServer()
+	{
+		document.getElementById("debug").value = "power: " + power + ", direction: " + direction;
+	}
+	
+	window.onload = function () 
+	{
+		//alert("hello");
+		
+		//document.getElementById("startButton").value = "yyy";
+		
+		
+		//document.getElementById(myI).style.WebkitTransitionDuration='1s';
+		//document.getElementById("divClubPath").style.webkitTransform = "rotate(-2deg)";
+		//document.getElementById("divClubPath").style.MozTransform = "translate(110px, 195px) rotate(90deg)";
+		// element.style.webkitTransform = "rotate(-2deg)";
+		// 		element.style.MozTransform = "rotate(-2deg)";
+	}
+	
+	function onTimer()
+	{
+		//alert("timer");
+		var button = document.getElementById("startButton");
+		if (button) {
+			//button.value = "onTimer = " + count;
+			if (doingBackswing)
+			{
+				count = count + 1;
+			} else {
+				count = count - 1;
+			}
+			
+		} else {
+			alert("button not found");
+		}
+		
+		
+		var rotateString = "rotate(";
+		if (doingBackswing)
+		{
+			rotateString = rotateString + (0 - (count * 2)) + "deg)";
+		} else {
+			rotateString = rotateString + (0 - (count * 2)) + "deg)";
+		}
+		
+		document.getElementById("debug").value = rotateString;
+		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
+	}
+	
+	function onReset ()
+	{
+		clearTimeout(timerID);
+		
+		isSwinging = false;
+		doingBackswing = false;
+		doingDownswing = false;
+		
+		power = 0;
+		direction = 0;
+		
+		count = 0;
+		
+		document.getElementById("debug").value = "";
+		var rotateString = "rotate(" + (0 - count) + "deg)";
+		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;
+	}
+
+</script>
+
+</head>
+
+<body>
+
+<div id="divFrame">
+  <div id="divClub">Club Angle</div>
+  <div id="divBall"></div>
+  
+</div>
+
+<input type="button"  id="startButton" onclick="startSwing()" value="Takeaway"/>
+<input type="button"  onclick="registerPower()" value="Top"/>
+<input type="button" onclick="registerDirection()" value="Impact"/>
+<input type="button" onclick="onReset()" value="Reset"/>
+<input id="debug" value="debug">
+
+</body>
+</html>
+
