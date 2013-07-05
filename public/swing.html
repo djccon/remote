@@ -117,7 +117,7 @@ div:hover
 		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
 		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
-		//timerID = setInterval ( "onTimer()", 10 );
+		timerID = setInterval ( "onTimer()", 10 );
 	}
 
 	// Click top of backswing
@@ -170,7 +170,7 @@ div:hover
 
 	function sendCommandToServer()
 	{
-		//document.getElementById("debug").value = "power: " + power + ", direction: " + direction;
+		document.getElementById("debug").value = "pwr: " + power + ", dir: " + direction;
 
 		var url = "api/send_swing_command";
 
@@ -199,7 +199,7 @@ div:hover
 			alert("error it");
 		}
 
-		request.send(params);
+		// don't send all the time. request.send(params);
 	}
 	
 	window.onload = function () 
@@ -209,29 +209,12 @@ div:hover
 	
 	function onTimer()
 	{
-		
-
-			if (doingBackswing)
-			{
-				count = count + 1;
-			} else {
-				count = count - 1;
-			}
-			
-
-		
-		
-		var rotateString = "rotate(";
 		if (doingBackswing)
 		{
-			rotateString = rotateString + (0 - (count * 2)) + "deg)";
+			count = count + 1;
 		} else {
-			rotateString = rotateString + (0 - (count * 2)) + "deg)";
-		}
-		
-		document.getElementById("debug").value = rotateString;
-		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;		
+			count = count - 1;
+		}		
 	}
 	
 	function onReset ()
