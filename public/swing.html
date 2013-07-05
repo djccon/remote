@@ -39,10 +39,10 @@ button:active {
 
 div
 {
-	transition: transform 0s;
-	-moz-transition: transform 0s; /* Firefox 4 */
-	-webkit-transition: transform 0s; /* Safari and Chrome */
-	-o-transition: transform 0s; /* Opera */
+	transition: transform 2s;
+	-moz-transition: transform 2s; /* Firefox 4 */
+	-webkit-transition: transform 2s; /* Safari and Chrome */
+	-o-transition: transform 2s; /* Opera */
 }
 
 div:hover
@@ -104,9 +104,19 @@ div:hover
 	
 	function startSwing()
 	{
+		if (isSwinging)
+		{
+			return;
+		}
+		
 		isSwinging = true;
 		doingBackswing = true;
-		timerID = setInterval ( "onTimer()", 10 );
+
+		var rotateString = "rotate(-260deg)";		
+		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;	
+
+		//timerID = setInterval ( "onTimer()", 10 );
 	}
 
 	// Click top of backswing
@@ -122,6 +132,10 @@ div:hover
 			return;
 		}
 		
+		var rotateString = "rotate(90deg)";
+		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;	
+
 		power = count;
 		
 		doingBackswing = false;
