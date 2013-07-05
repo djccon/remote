@@ -56,10 +56,10 @@ div:hover
 #divFrame
 {
 	position: relative;
-	height: 500px;
-	width: 500px;
-	margin: 100px;
-	padding:10px;
+	height: 400px;
+	width: 400px;
+	margin: 00px;
+	padding:0px;
 	border: 1px solid black;
 }
 
@@ -197,9 +197,7 @@ div:hover
 	function onTimer()
 	{
 		
-		var button = document.getElementById("startButton");
-		if (button) {
-			//button.value = "onTimer = " + count;
+
 			if (doingBackswing)
 			{
 				count = count + 1;
@@ -207,9 +205,7 @@ div:hover
 				count = count - 1;
 			}
 			
-		} else {
-			alert("button not found");
-		}
+
 		
 		
 		var rotateString = "rotate(";
@@ -255,15 +251,17 @@ div:hover
   <div id="divBall"></div>
 </div>
 
+<div id="divButtons">
+	<button id="startButton" onclick="startSwing()" >Takeaway</button>
+	<button onclick="registerPower()" >Top</button>
+	<button onclick="registerDirection()" >Impact</button>
+	<button onclick="onReset()" >Reset</button>
+	<input id="debug" value="debug">
+</div>
+
 <div id="results">
 	Results go here.
 </div>
-
-<input type="button"  id="startButton" onclick="startSwing()" value="Takeaway"/>
-<input type="button"  onclick="registerPower()" value="Top"/>
-<input type="button" onclick="registerDirection()" value="Impact"/>
-<input type="button" onclick="onReset()" value="Reset"/>
-<input id="debug" value="debug">
 
 </body>
 </html>
