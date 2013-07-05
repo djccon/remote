@@ -39,6 +39,7 @@ width:300px;
 	padding: 0px;
 	border: 1px solid black;
 	-moz-transform: translate(90px, 330px); 
+	-webkit-transform: translate(90px, 330px); 
 }
 
 #divClub
@@ -53,6 +54,8 @@ width:300px;
 
 	-moz-transform: translate(90px, 150px) rotate(0deg); 
 	-moz-transform-origin:75% 0%; 
+	-webkit-transform: translate(90px, 150px) rotate(0deg); 
+	-webkit-transform-origin:75% 0%; 
 }
 
 
@@ -125,21 +128,12 @@ width:300px;
 	
 	window.onload = function () 
 	{
-		//alert("hello");
 		
-		//document.getElementById("startButton").value = "yyy";
-		
-		
-		//document.getElementById(myI).style.WebkitTransitionDuration='1s';
-		//document.getElementById("divClubPath").style.webkitTransform = "rotate(-2deg)";
-		//document.getElementById("divClubPath").style.MozTransform = "translate(110px, 195px) rotate(90deg)";
-		// element.style.webkitTransform = "rotate(-2deg)";
-		// 		element.style.MozTransform = "rotate(-2deg)";
 	}
 	
 	function onTimer()
 	{
-		//alert("timer");
+		
 		var button = document.getElementById("startButton");
 		if (button) {
 			//button.value = "onTimer = " + count;
@@ -165,6 +159,7 @@ width:300px;
 		
 		document.getElementById("debug").value = rotateString;
 		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;		
 	}
 	
 	function onReset ()
@@ -183,6 +178,7 @@ width:300px;
 		document.getElementById("debug").value = "";
 		var rotateString = "rotate(" + (0 - count) + "deg)";
 		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;
+		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;
 	}
 
 </script>
