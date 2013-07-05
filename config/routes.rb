@@ -61,7 +61,7 @@ Remote::Application.routes.draw do
 
   post "api/mimic_params"
 
-  get "api/send_swing_command"
+  put "api/send_swing_command"
   
   post "api/send_shot_launch_conditions"
   post "api/send_shot_ball_landing"

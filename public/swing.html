@@ -5,6 +5,40 @@
 <meta charset="utf-8">
 <style type="text/css">
 
+button {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+}
+
+button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+}
+
+button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+}
+
 div
 {
 	transition: transform 0s;
@@ -15,7 +49,7 @@ div
 
 div:hover
 {
-width:300px;
+	width:300px;
 }
 
 
@@ -123,7 +157,36 @@ width:300px;
 
 	function sendCommandToServer()
 	{
-		document.getElementById("debug").value = "power: " + power + ", direction: " + direction;
+		//document.getElementById("debug").value = "power: " + power + ", direction: " + direction;
+
+		var url = "http://localhost:3000/api/send_swing_command";
+
+		var request = new XMLHttpRequest();
+		request.open("PUT", url, true);
+
+		power = 151;
+		direction = 10501;
+		var params = "power=" + power + "&direction=" + direction;
+
+		//Send the proper header information along with the request
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.setRequestHeader("Content-length", params.length);
+		request.setRequestHeader("Connection", "close");
+
+		request.onload = function() {
+			if (request.status == 200) {
+				console.log(request.responseText);
+				document.getElementById("results").innerHTML = request.responseText;
+			} else {
+				alert(request.status + " " + request.statusText);
+			}
+		}
+
+		request.onerror = function() {
+			alert("error it");
+		}
+
+		request.send(params);
 	}
 	
 	window.onload = function () 
@@ -190,7 +253,10 @@ width:300px;
 <div id="divFrame">
   <div id="divClub">Club Angle</div>
   <div id="divBall"></div>
-  
+</div>
+
+<div id="results">
+	Results go here.
 </div>
 
 <input type="button"  id="startButton" onclick="startSwing()" value="Takeaway"/>
