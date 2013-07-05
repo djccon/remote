@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <style type="text/css">
 
-button {
+.button {
    border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
@@ -13,36 +13,36 @@ button {
    background: -moz-linear-gradient(top, #3e779d, #65a9d7);
    background: -ms-linear-gradient(top, #3e779d, #65a9d7);
    background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 11px 22px;
-   -webkit-border-radius: 32px;
-   -moz-border-radius: 32px;
-   border-radius: 32px;
+   padding: 5.5px 11px;
+   -webkit-border-radius: 40px;
+   -moz-border-radius: 40px;
+   border-radius: 40px;
    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
    box-shadow: rgba(0,0,0,1) 0 1px 0;
    text-shadow: rgba(0,0,0,.4) 0 1px 0;
    color: white;
-   font-size: 18px;
+   font-size: 16px;
    font-family: Helvetica, Arial, Sans-Serif;
    text-decoration: none;
    vertical-align: middle;
    }
-button:hover {
+.button:hover {
    border-top-color: #28597a;
    background: #28597a;
    color: #ccc;
    }
-button:active {
+.button:active {
    border-top-color: #1b435e;
    background: #1b435e;
    }
 
 div
 {
-	transition: transform 2s;
-	-moz-transition: transform 2s; /* Firefox 4 */
-	-webkit-transition: -webkit-transform 2s; /* Safari and Chrome */
-	-o-transition: transform 2s; /* Opera */
+	transition: transform 2s ;
+	-moz-transition: transform 2s ; /* Firefox 4 */
+	-webkit-transition: -webkit-transform 2s ; /* Safari and Chrome */
+	-o-transition: transform 2s ; /* Opera */
 }
 
 div:hover
@@ -55,7 +55,7 @@ div:hover
 {
 	position: relative;
 	height: 400px;
-	width: 400px;
+	width: 420px;
 	margin: 00px;
 	padding:0px;
 	border: 1px solid black;
@@ -70,13 +70,13 @@ div:hover
 	margin: 0px;
 	padding: 0px;
 	border: 1px solid black;
-	-moz-transform: translate(90px, 330px); 
-	-webkit-transform: translate(90px, 330px); 
+	-moz-transform: translate(200px, 380px); 
+	-webkit-transform: translate(200px, 380px); 
 }
 
 #divClub
 {
-	background-image: url('images/iron_left_cropped_small.jpg'); 
+	background-image: url('images/iron_right_cropped_small.jpg'); 
 	padding:0px;
 	position: absolute;
 	border: 0px solid black;
@@ -84,9 +84,9 @@ div:hover
 	height: 195px;
 	width: 25px;
 
-	-moz-transform: translate(90px, 150px) rotate(0deg); 
+	-moz-transform: translate(190px, 200px) rotate(0deg); 
 	-moz-transform-origin:75% 0%; 
-	-webkit-transform: translate(90px, 150px) rotate(0deg); 
+	-webkit-transform: translate(190px, 200px) rotate(0deg); 
 	-webkit-transform-origin:75% 0%; 
 }
 
@@ -101,6 +101,7 @@ div:hover
 	var doingDownswing = false;
 	var power = 0;
 	var direction = 0;
+	var clubTranslation = "translate(190px, 200px)";
 	
 	function startSwing()
 	{
@@ -112,9 +113,9 @@ div:hover
 		isSwinging = true;
 		doingBackswing = true;
 
-		var rotateString = "rotate(-260deg)";		
-		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;	
+		var rotateString = "rotate(260deg)";		
+		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
 		//timerID = setInterval ( "onTimer()", 10 );
 	}
@@ -132,9 +133,9 @@ div:hover
 			return;
 		}
 		
-		var rotateString = "rotate(90deg)";
-		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;	
+		var rotateString = "rotate(-90deg)";
+		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
 		power = count;
 		
@@ -229,8 +230,8 @@ div:hover
 		}
 		
 		document.getElementById("debug").value = rotateString;
-		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;		
+		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
+		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;		
 	}
 	
 	function onReset ()
@@ -248,8 +249,8 @@ div:hover
 		
 		document.getElementById("debug").value = "";
 		var rotateString = "rotate(" + (0 - count) + "deg)";
-		document.getElementById("divClub").style.MozTransform = "translate(90px, 150px) " + rotateString;
-		document.getElementById("divClub").style.WebkitTransform = "translate(90px, 150px) " + rotateString;
+		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;
+		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;
 	}
 
 </script>
@@ -259,20 +260,21 @@ div:hover
 <body>
 
 <div id="divFrame">
-  <div id="divClub">Club Angle</div>
+  <div id="divClub"></div>
   <div id="divBall"></div>
 </div>
 
 <div id="divButtons">
-	<button id="startButton" onclick="startSwing()" >Takeaway</button>
-	<button onclick="registerPower()" >Top</button>
-	<button onclick="registerDirection()" >Impact</button>
-	<button onclick="onReset()" >Reset</button>
+	<button id="startButton" class="button" onclick="startSwing()" >Takeaway</button>
+	<button class="button" onclick="registerPower()" >Top</button>
+	<button class="button" onclick="registerDirection()" >Impact</button>
+	<br>
+	<button class="button" onclick="onReset()" >Reset</button>
 	<input id="debug" value="debug">
 </div>
 
 <div id="results">
-	Results go here.
+	/* Results go here. */
 </div>
 
 </body>
