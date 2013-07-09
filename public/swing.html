@@ -77,7 +77,7 @@ div:hover
 
 #divClub
 {
-	background-image: url('images/iron_right_png.png'); 
+	background-image: url('images/iron_right_cropped_small.png'); 
 	padding:0px;
 	position: absolute;
 	border: 0px solid black;
@@ -173,15 +173,21 @@ div:hover
 
 	function sendCommandToServer()
 	{
-		document.getElementById("debug").value = "pwr: " + power + ", dir: " + direction;
-
 		var url = "api/send_swing_command";
 
 		request = new XMLHttpRequest();
 		request.open("PUT", url, true);
 
+		power = Math.floor(power / 10);
+		if (power > 15) {
+			power = 15;
+		}
+
 		power = 151 + power;
 		direction = 10501 + direction;
+
+		document.getElementById("debug").value = "pwr: " + power + ", dir: " + direction;
+
 		var params = "power=" + power + "&direction=" + direction;
 
 		//Send the proper header information along with the request
