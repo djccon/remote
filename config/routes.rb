@@ -57,6 +57,9 @@ Remote::Application.routes.draw do
   get "api/get_responses"
   get "api/get_all_responses"
   get "api/push_command_block"
+  get "api/get_latest_weather"
+  get "api/get_command_item"
+
   post "api/output_debug_string"
 
   post "api/mimic_params"

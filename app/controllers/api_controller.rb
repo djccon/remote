@@ -36,6 +36,23 @@ class ApiController < ApplicationController
     render json: response 
   end
 
+  def get_latest_weather
+    # Get newest command from unprocessed commands
+
+    response = Hash.new
+
+    response[:status] = "ok"
+    response[:type] = "weather"
+
+    latestWeather = Weather.last
+
+    if (!latestWeather.nil?)
+        response[:data] = latestWeather
+    end
+
+    render json: response 
+  end
+
   def get_all_commands
     response = Hash.new
     response[:status] = "ok"
@@ -407,6 +424,14 @@ class ApiController < ApplicationController
     end
 
     render json: shot
+  end
+
+
+  def get_command_item
+    response = Hash.new
+    commandItem = CommandItem.find_by_command_id(params[:command_id]);
+    response[:data] = commandItem;
+    render json: response
   end
 
 

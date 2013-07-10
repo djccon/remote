@@ -3,253 +3,12 @@
 
 <head>
 <meta charset="utf-8">
-<style type="text/css">
 
-.button {
-   border-top: 1px solid #96d1f8;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 5.5px 11px;
-   -webkit-border-radius: 40px;
-   -moz-border-radius: 40px;
-   border-radius: 40px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
-   font-size: 16px;
-   font-family: Helvetica, Arial, Sans-Serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-.button:hover {
-   border-top-color: #28597a;
-   background: #28597a;
-   color: #ccc;
-   }
-.button:active {
-   border-top-color: #1b435e;
-   background: #1b435e;
-   }
-
-div
-{
-	transition: transform 2s ;
-	-moz-transition: transform 2s ; /* Firefox 4 */
-	-webkit-transition: -webkit-transform 2s ; /* Safari and Chrome */
-	-o-transition: transform 2s ; /* Opera */
-}
-
-div:hover
-{
-	width:300px;
-}
+<script src="utils.js"></script>
+<script src="swing.js"></script>
+<link rel="stylesheet" href="golflabs.css">	
 
 
-#divFrame
-{
-	position: relative;
-	height: 400px;
-	width: 420px;
-	margin: 00px;
-	padding:0px;
-	border: 1px solid black;
-}
-
-#divBall
-{
-	position: absolute;
-	background-color: white;
-	height: 10px;
-	width: 10px;
-	margin: 0px;
-	padding: 0px;
-	border: 1px solid black;
-	-moz-transform: translate(200px, 380px); 
-	-webkit-transform: translate(200px, 380px); 
-}
-
-#divClub
-{
-	background-image: url('images/iron_right_cropped_small.png'); 
-	padding:0px;
-	position: absolute;
-	border: 0px solid black;
-	background-color: red;
-	height: 195px;
-	width: 25px;
-
-	-moz-transform: translate(190px, 200px) rotate(0deg); 
-	-moz-transform-origin:75% 0%; 
-	-webkit-transform: translate(190px, 200px) rotate(0deg); 
-	-webkit-transform-origin:75% 0%; 
-}
-
-
-</style>
-
-<script>
-	var count = 0;
-	var timerID = 0;
-	var isSwinging = false;
-	var doingBackswing = false;
-	var doingDownswing = false;
-	var power = 0;
-	var direction = 0;
-	var clubTranslation = "translate(190px, 200px)";
-	
-	function startSwing()
-	{
-		if (isSwinging)
-		{
-			return;
-		}
-		
-		isSwinging = true;
-		doingBackswing = true;
-
-		var rotateString = "rotate(260deg)";		
-		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
-
-		timerID = setInterval ( "onTimer()", 10 );
-	}
-
-	// Click top of backswing
-	function registerPower()
-	{
-		if (!isSwinging)
-		{
-			return;
-		}
-		
-		if (!doingBackswing)
-		{
-			return;
-		}
-		
-		var rotateString = "rotate(-90deg)";
-		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
-		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
-
-		power = count;
-		
-		doingBackswing = false;
-		doingDownswing = true;
-	}
-
-	function registerDirection()
-	{
-		if (!isSwinging)
-		{
-			return;
-		}
-		
-		if (!doingDownswing)
-		{
-			return;
-		}
-		
-		clearTimeout(timerID);
-		
-		doingBackswing = false;
-		doingDownswing = false;
-		isSwinging = false;
-		
-		direction = count;
-		
-		//alert('Direction registered')
-		
-		sendCommandToServer();
-	}
-
-	var request;
-
-	function sendCommandToServer()
-	{
-		var url = "api/send_swing_command";
-
-		request = new XMLHttpRequest();
-		request.open("PUT", url, true);
-
-		power = Math.floor(power / 10);
-		if (power > 15) {
-			power = 15;
-		}
-
-		power = 151 + power;
-		direction = 10501 + direction;
-
-		document.getElementById("debug").value = "pwr: " + power + ", dir: " + direction;
-
-		var params = "power=" + power + "&direction=" + direction;
-
-		//Send the proper header information along with the request
-		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		request.setRequestHeader("Content-length", params.length);
-		request.setRequestHeader("Connection", "close");
-
-		request.onload = function() {
-			if (request.status == 200) {
-				console.log(request.responseText);
-				document.getElementById("results").innerHTML = request.responseText;
-			} else {
-				alert(request.status + " " + request.statusText);
-			}
-		}
-
-		request.onerror = function() {
-			alert("error it");
-		}
-
-		request.send(params);
-	}
-	
-	window.onload = function () 
-	{
-		
-	}
-	
-	function onTimer()
-	{
-		if (doingBackswing)
-		{
-			count = count + 1;
-		} else {
-			count = count - 1;
-		}		
-	}
-
-	function onSend()
-	{
-		request.send(params);
-	}
-	
-	function onReset ()
-	{
-		clearTimeout(timerID);
-		
-		isSwinging = false;
-		doingBackswing = false;
-		doingDownswing = false;
-		
-		power = 0;
-		direction = 0;
-		
-		count = 0;
-		
-		document.getElementById("debug").value = "";
-		var rotateString = "rotate(" + (0 - count) + "deg)";
-		document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;
-		document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;
-	}
-
-</script>
 
 </head>
 
@@ -260,20 +19,169 @@ div:hover
   <div id="divBall"></div>
 </div>
 
+<div id="weather">
+	<!-- weather programmatically here -->
+	Weather Data here
+</div>
+
+<div id="launchData">
+	<!-- launch data programmatically put here -->
+	Launch Data Here
+</div>
+
 <div id="divButtons">
 	<button id="startButton" class="button" onclick="startSwing()" >Takeaway</button>
 	<button class="button" onclick="registerPower()" >Top</button>
 	<button class="button" onclick="registerDirection()" >Impact</button>
 	<br>
 	<button class="button" onclick="onReset()" >Reset</button>
-	<!-- button class="button" onclick="onSend()" >Send</button -->
+	<button class="button" onclick="onGetWeather()" >Get Weather</button>
 	<input id="debug" value="debug">
 </div>
 
 <div id="results">
-	/* Results go here. */
+	/* send_swing_command Results go here. */
 </div>
 
 </body>
 </html>
 
+
+<!-- http://10.1.10.17:3000/shots/123.json
+
+{
+    "num_ball_landing_items": 3,
+    "num_ball_flight_items": 0,
+    "num_club_path_items": 0,
+    "num_command_items": 1,
+    "num_weather_items": 1,
+    "shot": {
+        "created_at": "2013-07-09T19:01:42Z",
+        "id": 123,
+        "updated_at": "2013-07-09T19:01:42Z"
+    },
+    "launch_items": [
+        {
+            "created_at": "2013-07-09T19:01:43Z",
+            "id": 107,
+            "launch_id": 125,
+            "shot_id": 123,
+            "updated_at": "2013-07-09T19:01:43Z"
+        }
+    ],
+    "launches": [
+        {
+            "attack_angle": 0.0,
+            "ball_horizontal_angle": 1.95,
+            "ball_speed": 36.74,
+            "ball_vertical_angle": 32.82,
+            "club_path": 0.0,
+            "club_speed": 36.5,
+            "created_at": "2013-07-09T19:01:43Z",
+            "dynamic_loft": 46.81,
+            "face_angle": 2.02,
+            "id": 125,
+            "smash_factor": 1.007,
+            "spin_axis_horizontal": 91.84,
+            "spin_axis_vertical": 0.16,
+            "spin_rate": 11311.0,
+            "swing_plane_horizontal": 0.0,
+            "swing_plane_vertical": 0.0,
+            "updated_at": "2013-07-09T19:01:43Z"
+        }
+    ],
+    "ball_landing_items": [
+        {
+            "ball_landing_id": 201,
+            "created_at": "2013-07-09T19:01:43Z",
+            "id": 199,
+            "shot_id": 123,
+            "updated_at": "2013-07-09T19:01:43Z"
+        },
+        {
+            "ball_landing_id": 202,
+            "created_at": "2013-07-09T19:01:43Z",
+            "id": 200,
+            "shot_id": 123,
+            "updated_at": "2013-07-09T19:01:43Z"
+        },
+        {
+            "ball_landing_id": 203,
+            "created_at": "2013-07-09T19:01:43Z",
+            "id": 201,
+            "shot_id": 123,
+            "updated_at": "2013-07-09T19:01:43Z"
+        }
+    ],
+    "ball_landings": [
+        {
+            "carry": 87.17,
+            "created_at": "2013-07-09T19:01:43Z",
+            "horizontal_angle": 0.0,
+            "id": 201,
+            "side": 2.77,
+            "speed": 0.0,
+            "time": 6.5,
+            "updated_at": "2013-07-09T19:01:43Z",
+            "vertical_angle": 0.0,
+            "x": 87.12,
+            "y": 0.0,
+            "z": 2.77
+        },
+        {
+            "carry": 88.01,
+            "created_at": "2013-07-09T19:01:43Z",
+            "horizontal_angle": 1.32,
+            "id": 202,
+            "side": 2.77,
+            "speed": 22.53,
+            "time": 4.77,
+            "updated_at": "2013-07-09T19:01:43Z",
+            "vertical_angle": 49.37,
+            "x": 87.96,
+            "y": -0.15,
+            "z": 2.77
+        },
+        {
+            "carry": 87.87,
+            "created_at": "2013-07-09T19:01:43Z",
+            "horizontal_angle": 1.55,
+            "id": 203,
+            "side": 2.79,
+            "speed": 22.71,
+            "time": 4.76,
+            "updated_at": "2013-07-09T19:01:43Z",
+            "vertical_angle": 49.72,
+            "x": 87.83,
+            "y": 0.0,
+            "z": 2.79
+        }
+    ],
+    "ball_flights": [
+        
+    ],
+    "club_paths": [
+        
+    ],
+    "commands": [
+        {
+            "cmd": "AL10511,AR52|AL160,AR62|TR52|TR62|MS105",
+            "created_at": "2013-07-09T19:01:25Z",
+            "id": 82,
+            "processed": true,
+            "updated_at": "2013-07-09T19:01:28Z"
+        }
+    ],
+    "weathers": [
+        {
+            "created_at": "2013-07-09T19:01:42Z",
+            "id": 42,
+            "updated_at": "2013-07-09T19:01:42Z",
+            "weather_type": "shot",
+            "wind_direction": 67.0,
+            "wind_speed": 5.0
+        }
+    ]
+}
+
+-->
