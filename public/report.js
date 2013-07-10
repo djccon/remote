@@ -59,7 +59,7 @@ function onGotShot(response)
 		var message = "You shot a distance of " 
 			+ Math.round(carryYds) + " yds and were off-line by " + Math.round(offlineYds) 
 			+ " yds. Total distance from hole: " + Math.round(distanceYds) + " yards";
-		document.getElementById("results").innerHTML = message;
+		document.getElementById("results").innerHTML = message + "\n\n" + JSON.stringify(response, null, 4);
 		goToReportPage(shot.id);
 		
 	}
