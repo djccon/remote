@@ -108,7 +108,7 @@ function sendCommandToServer()
 			console.log(request.responseText);
 			var responseObj = JSON.parse(request.responseText);
 			lastCommandObj = responseObj.data;
-			document.getElementById("results").innerHTML = lastCommandObj.id + " >>> " + JSON.stringify(lastCommandObj);
+			document.getElementById("results").innerHTML = lastCommandObj.id + " >>> " + JSON.stringify(lastCommandObj, null, 4);
 
 			// starting polling server to get launch data for this command
 			startLaunchDataTimer();
@@ -257,8 +257,9 @@ function getLaunchData()
 
 function onGotCommandItem(response)
 {
+	console.log(JSON.stringify(response))
 	var commandItem = response.data;
-	document.getElementById("launchData").innerHTML = JSON.stringify(commandItem);
+	document.getElementById("launchData").innerHTML = JSON.stringify(commandItem, null, 4);
 
 	var url = "shots/" + commandItem.shot_id + ".json";
 	doGetRequest(url, onGotShot);
@@ -266,75 +267,29 @@ function onGotCommandItem(response)
 
 function onGotShot(response)
 {
+	// figure out if it's time to head to the report page.
+
 	var shot = response.shot;
 	var landings = response.ball_landings;
 	var landing = landings[2];
 
-	/*
-	landing = {
-        "carry": 87.87,
-        "created_at": "2013-07-09T19:01:43Z",
-        "horizontal_angle": 1.55,
-        "id": 203,
-        "side": 2.79,
-        "speed": 22.71,
-        "time": 4.76,
-        "updated_at": "2013-07-09T19:01:43Z",
-        "vertical_angle": 49.72,
-        "x": 87.83,
-        "y": 0.0,
-        "z": 2.79
-    }
-	*/
-
-	var xdiff = landing.x - 137.16; // 150 yards in meters
-	var zdiff = landing.z - 0;
-
-	var distance = Math.sqrt((xdiff * xdiff) + (zdiff * zdiff));
-
-	var carryYds = landing.x * 1.0936;
-	var offlineYds = landing.z * 1.0936;
-	var distanceYds = distance * 1.0936;
-
 	if (landing) {
-		var message = "You shot a distance of " 
-			+ Math.round(carryYds) + " yds and were off-line by " + Math.round(offlineYds) 
-			+ " yds. Total distance from hole: " + Math.round(distanceYds) + " yards";
-		document.getElementById("launchData").innerHTML = message;
+
 		stopLaunchDataTimer();
+		goToReportPage(shot.id);
+		
 	}
 }
 
-function doGetRequest(url, closure)
+function onGoToReport()
 {
-	// this function get call then call closure with JSON parsed response text 
-	// include all params on query string
+	goToReportPage(13);
+}
 
-	var request = new XMLHttpRequest();
-	request.open("GET", url);
-
-	request.onload = function() {
-		
-		if (request.status == 200) {
-			console.log("RESPONSE: " + url + ": " + request.responseText);
-
-			if (closure)
-			{
-				closure(JSON.parse(request.responseText));
-			}
-			
-		} else {
-			alert(request.status + " " + request.statusText);
-		}
-
-	}
-
-	request.onerror = function() {
-		alert(request.status + " " + request.statusText);
-	}
-
-	request.send(null);
-
+function goToReportPage(shotID)
+{
+	sessionStorage.setItem("shotID", shotID);
+	redirectTo("report.html");
 }
 
 

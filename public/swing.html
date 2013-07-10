@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
 
-<script src="utils.js"></script>
-<script src="swing.js"></script>
-<link rel="stylesheet" href="golflabs.css">	
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="golflabs.css">	
 
 
-
+	<script src="utils.js"></script>
+	<script src="swing.js"></script>
+	
 </head>
 
 <body>
@@ -36,7 +36,10 @@
 	<br>
 	<button class="button" onclick="onReset()" >Reset</button>
 	<button class="button" onclick="onGetWeather()" >Get Weather</button>
+	<br>
 	<input id="debug" value="debug">
+	<br>
+	<button class="button" onclick="onGoToReport()" >Report</button>
 </div>
 
 <div id="results">
@@ -47,141 +50,4 @@
 </html>
 
 
-<!-- http://10.1.10.17:3000/shots/123.json
 
-{
-    "num_ball_landing_items": 3,
-    "num_ball_flight_items": 0,
-    "num_club_path_items": 0,
-    "num_command_items": 1,
-    "num_weather_items": 1,
-    "shot": {
-        "created_at": "2013-07-09T19:01:42Z",
-        "id": 123,
-        "updated_at": "2013-07-09T19:01:42Z"
-    },
-    "launch_items": [
-        {
-            "created_at": "2013-07-09T19:01:43Z",
-            "id": 107,
-            "launch_id": 125,
-            "shot_id": 123,
-            "updated_at": "2013-07-09T19:01:43Z"
-        }
-    ],
-    "launches": [
-        {
-            "attack_angle": 0.0,
-            "ball_horizontal_angle": 1.95,
-            "ball_speed": 36.74,
-            "ball_vertical_angle": 32.82,
-            "club_path": 0.0,
-            "club_speed": 36.5,
-            "created_at": "2013-07-09T19:01:43Z",
-            "dynamic_loft": 46.81,
-            "face_angle": 2.02,
-            "id": 125,
-            "smash_factor": 1.007,
-            "spin_axis_horizontal": 91.84,
-            "spin_axis_vertical": 0.16,
-            "spin_rate": 11311.0,
-            "swing_plane_horizontal": 0.0,
-            "swing_plane_vertical": 0.0,
-            "updated_at": "2013-07-09T19:01:43Z"
-        }
-    ],
-    "ball_landing_items": [
-        {
-            "ball_landing_id": 201,
-            "created_at": "2013-07-09T19:01:43Z",
-            "id": 199,
-            "shot_id": 123,
-            "updated_at": "2013-07-09T19:01:43Z"
-        },
-        {
-            "ball_landing_id": 202,
-            "created_at": "2013-07-09T19:01:43Z",
-            "id": 200,
-            "shot_id": 123,
-            "updated_at": "2013-07-09T19:01:43Z"
-        },
-        {
-            "ball_landing_id": 203,
-            "created_at": "2013-07-09T19:01:43Z",
-            "id": 201,
-            "shot_id": 123,
-            "updated_at": "2013-07-09T19:01:43Z"
-        }
-    ],
-    "ball_landings": [
-        {
-            "carry": 87.17,
-            "created_at": "2013-07-09T19:01:43Z",
-            "horizontal_angle": 0.0,
-            "id": 201,
-            "side": 2.77,
-            "speed": 0.0,
-            "time": 6.5,
-            "updated_at": "2013-07-09T19:01:43Z",
-            "vertical_angle": 0.0,
-            "x": 87.12,
-            "y": 0.0,
-            "z": 2.77
-        },
-        {
-            "carry": 88.01,
-            "created_at": "2013-07-09T19:01:43Z",
-            "horizontal_angle": 1.32,
-            "id": 202,
-            "side": 2.77,
-            "speed": 22.53,
-            "time": 4.77,
-            "updated_at": "2013-07-09T19:01:43Z",
-            "vertical_angle": 49.37,
-            "x": 87.96,
-            "y": -0.15,
-            "z": 2.77
-        },
-        {
-            "carry": 87.87,
-            "created_at": "2013-07-09T19:01:43Z",
-            "horizontal_angle": 1.55,
-            "id": 203,
-            "side": 2.79,
-            "speed": 22.71,
-            "time": 4.76,
-            "updated_at": "2013-07-09T19:01:43Z",
-            "vertical_angle": 49.72,
-            "x": 87.83,
-            "y": 0.0,
-            "z": 2.79
-        }
-    ],
-    "ball_flights": [
-        
-    ],
-    "club_paths": [
-        
-    ],
-    "commands": [
-        {
-            "cmd": "AL10511,AR52|AL160,AR62|TR52|TR62|MS105",
-            "created_at": "2013-07-09T19:01:25Z",
-            "id": 82,
-            "processed": true,
-            "updated_at": "2013-07-09T19:01:28Z"
-        }
-    ],
-    "weathers": [
-        {
-            "created_at": "2013-07-09T19:01:42Z",
-            "id": 42,
-            "updated_at": "2013-07-09T19:01:42Z",
-            "weather_type": "shot",
-            "wind_direction": 67.0,
-            "wind_speed": 5.0
-        }
-    ]
-}
-
--->
