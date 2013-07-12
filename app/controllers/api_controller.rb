@@ -46,6 +46,9 @@ class ApiController < ApplicationController
 
     latestWeather = Weather.last
 
+    latestWeather.wind_speed = 15 + rand(7)
+    latestWeather.wind_direction = 289 + rand(25)
+
     if (!latestWeather.nil?)
         response[:data] = latestWeather
     end

@@ -1,4 +1,12 @@
 
+
+window.onload = function () 
+{
+	startWeatherTimer();
+	startCountdownTimer(10, countdownCallback);
+}
+
+
 var count = 0;
 var timerID = 0;
 var launchDataTimerID = 0;
@@ -8,7 +16,8 @@ var doingBackswing = false;
 var doingDownswing = false;
 var power = 0;
 var direction = 0;
-var clubTranslation = "translate(190px, 200px)";
+var clubTranslation = "translate(60px, 50px)";
+var weatherTranslation = "translate(50px, 50px)";
 var weatherCount = 0;
 var lastCommandObj = null;
 
@@ -23,8 +32,8 @@ function startSwing()
 	doingBackswing = true;
 
 	var rotateString = "rotate(260deg)";		
-	document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
-	document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
+	document.getElementById("divPointer").style.MozTransform = clubTranslation + " " + rotateString;		
+	document.getElementById("divPointer").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
 	timerID = setInterval ( "onTimer()", 10 );
 }
@@ -43,8 +52,8 @@ function registerPower()
 	}
 	
 	var rotateString = "rotate(-90deg)";
-	document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;		
-	document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;	
+	document.getElementById("divPointer").style.MozTransform = clubTranslation + " " + rotateString;		
+	document.getElementById("divPointer").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
 	power = count;
 	
@@ -79,8 +88,25 @@ function registerDirection()
 }
 
 
+function processButtonClick()
+{
+	if (!isSwinging)
+	{
+		document.getElementById("swingButton").innerHTML = "Top";
+		startSwing();
+	} else if (doingBackswing) {
+		document.getElementById("swingButton").innerHTML = "Impact";
+		registerPower();
+	} else if (doingDownswing) {
+		document.getElementById("swingButton").innerHTML = "Swing";
+		registerDirection();
+	}
+}
+
 function sendCommandToServer()
 {
+	return;
+
 	var url = "api/send_swing_command";
 
 	var request = new XMLHttpRequest();
@@ -124,11 +150,6 @@ function sendCommandToServer()
 	request.send(params);
 }
 
-window.onload = function () 
-{
-	startWeatherTimer();
-}
-
 function onTimer()
 {
 	if (doingBackswing)
@@ -147,35 +168,29 @@ function onGetWeather()
 function getWeather()
 {
 	var url = "api/get_latest_weather";
+	doGetRequest(url, onGotWeather);
+}
 
-	var request = new XMLHttpRequest();
-	request.open("GET", url);
+function onGotWeather(response)
+{
+	//var stringResponse = (JSON.stringify(response, null, 4);
+	//document.getElementById("weather").innerHTML = stringResponse ;
 
-	request.onload = function() {
-		
-		weatherCount++;
+	var weatherObj = response.data;
 
-		if (request.status == 200) {
-			console.log(request.responseText);
+	document.getElementById("weather").innerHTML = weatherCount 
+		+ " -> Speed: " + weatherObj.wind_speed 
+		+ ", Direction: " + weatherObj.wind_direction;
 
-			var responseObj = JSON.parse(request.responseText);
-			var weatherObj = responseObj.data;
+	document.getElementById("divWindSpeed").innerHTML = weatherObj.wind_speed + "mph";
 
-			document.getElementById("weather").innerHTML = weatherCount 
-				+ " -> Speed: " + weatherObj.wind_speed 
-				+ ", Direction: " + weatherObj.wind_direction;
-			//document.getElementById("weather").innerHTML = weatherCount + " -> " + request.responseText;
-		} else {
-			alert(request.status + " " + request.statusText);
-		}
+	var rotateString = "rotate(" + (weatherObj.wind_direction - 180) + "deg)";
+	document.getElementById("divWeatherPointer").style.MozTransform = weatherTranslation + " " + rotateString;
+	document.getElementById("divWeatherPointer").style.WebkitTransform = weatherTranslation + " " + rotateString;
 
-	}
+	
 
-	request.onerror = function() {
-		alert(request.status + " " + request.statusText);
-	}
-
-	request.send(null);
+	//document.getElementById("weather").innerHTML = weatherCount + " -> " + request.responseText;
 }
 
 function onReset ()
@@ -195,14 +210,14 @@ function onReset ()
 	
 	document.getElementById("debug").value = "";
 	var rotateString = "rotate(" + (0 - count) + "deg)";
-	document.getElementById("divClub").style.MozTransform = clubTranslation + " " + rotateString;
-	document.getElementById("divClub").style.WebkitTransform = clubTranslation + " " + rotateString;
+	document.getElementById("divPointer").style.MozTransform = clubTranslation + " " + rotateString;
+	document.getElementById("divPointer").style.WebkitTransform = clubTranslation + " " + rotateString;
 }
 
 function startWeatherTimer()
 {
 	getWeather();
-	weatherTimerID = setInterval ("onWeatherTimer()", 13000);
+	weatherTimerID = setInterval ("onWeatherTimer()", 2000);
 }
 
 function onWeatherTimer()
@@ -279,6 +294,11 @@ function onGotShot(response)
 		goToReportPage(shot.id);
 		
 	}
+}
+
+function countdownCallback()
+{
+	redirectTo("report.html?status=toolong");
 }
 
 function onGoToReport()

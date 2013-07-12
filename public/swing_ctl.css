@@ -1,0 +1,86 @@
+#swingControlFrame
+{
+	padding:5px;
+	position: relative;
+	border: 5px solid black;
+	background-color: white;
+	height: 100px;
+	width: 120px;
+	margin: 5px;
+}
+
+#weatherControlFrame
+{
+	padding:5px;
+	position: relative;
+	border: 5px solid black;
+	background-color: white;
+	height: 100px;
+	width: 100px;
+	margin: 5px;
+}
+
+#divSwingControlBackground
+{
+	background-image: url('images/golf_power_meter_100.jpg'); 
+	padding:0px;
+	position: absolute;
+	border: 0px solid blue;
+	background-color: blue;
+	height: 100px;
+	width: 120px;
+}
+
+#divWeatherControlBackground
+{
+	background-image: url('images/compass_rose_bw_100.jpg'); 
+	padding:0px;
+	position: absolute;
+	border: 0px solid blue;
+	background-color: blue;
+	height: 100px;
+	width: 100px;
+}
+
+#divPointer
+{
+	position: absolute;
+	background-color: red;
+	height: 45px;
+	width: 3px;
+	margin: 0px;
+	padding: 0px;
+	border: 0px solid black;
+	-moz-transform: translate(60px, 50px) rotate(0deg); 
+	-webkit-transform: translate(60px, 50px) rotate(0deg);
+	-moz-transform-origin:75% 0%; 
+	-webkit-transform-origin:75% 0%; 	
+}
+
+#divWeatherPointer
+{
+	position: absolute;
+	background-color: red;
+	height: 45px;
+	width: 3px;
+	margin: 0px;
+	padding: 0px;
+	border: 0px solid black;
+	-moz-transform: translate(50px, 50px) rotate(0deg); 
+	-webkit-transform: translate(50px, 50px) rotate(0deg);
+	-moz-transform-origin:75% 0%; 
+	-webkit-transform-origin:75% 0%; 	
+}
+
+#divWindSpeed
+{
+	position: absolute;
+	background-color: white;
+	height: 15px;
+	width: 40px;
+	margin: 0px;
+	padding: 0px;
+	border: 0px solid black;
+}
+
+

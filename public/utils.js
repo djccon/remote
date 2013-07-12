@@ -35,3 +35,43 @@ function doGetRequest(url, closure)
 
 }
 
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var timeleft = 30;
+var countdownCallback = null;
+
+function startCountdownTimer(seconds, callback)
+{
+	timeleft = seconds;
+	countdownCallback = callback;
+	// Set this after sending a command
+	countdownTimerID = setInterval ("onCountdownTimer()", 1000);
+}
+
+function stopCountdownTimer()
+{
+	// Set this after sending a command
+	clearTimeout(countdownTimerID);
+}
+
+function onCountdownTimer()
+{
+	timeleft--;
+	updateCountdownDisplay(timeleft);
+	if (timeleft == 0)
+	{
+		stopCountdownTimer();
+		if (countdownCallback) {
+			countdownCallback();
+		}
+	}
+}
+
+function updateCountdownDisplay(timeleft)
+{
+	document.getElementById("countdownTimer").innerHTML = "Time left: " + timeleft;	
+}
+

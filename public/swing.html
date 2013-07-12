@@ -5,23 +5,37 @@
 
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="golflabs.css">	
+	<link rel="stylesheet" href="swing_ctl.css">	
 
 
 	<script src="utils.js"></script>
 	<script src="swing.js"></script>
 	
+	<script type="text/javascript" src="http://robotcam.click2stream.com/?type=javascript&amp;width=320&amp;height=240"></script>
 </head>
 
 <body>
 
-<div id="divFrame">
-  <div id="divClub"></div>
-  <div id="divBall"></div>
-</div>
+<div id="player_robotcam"></div>
 
 <div id="weather">
 	<!-- weather programmatically here -->
 	Weather Data here
+</div>
+
+<div id="frameSwingTest">
+	<div id="swingControlFrame">
+		<div id="divSwingControlBackground"></div>
+		<div id="divPointer"></div>
+	</div>
+</div>
+
+<div id="frameWeatherTest">
+	<div id="weatherControlFrame">
+		<div id="divWeatherControlBackground"></div>
+		<div id="divWindSpeed"></div>
+		<div id="divWeatherPointer"></div>
+	</div>
 </div>
 
 <div id="launchData">
@@ -30,6 +44,8 @@
 </div>
 
 <div id="divButtons">
+	<button id="swingButton" class="button" onclick="processButtonClick()" >Swing</button>
+	<br>
 	<button id="startButton" class="button" onclick="startSwing()" >Takeaway</button>
 	<button class="button" onclick="registerPower()" >Top</button>
 	<button class="button" onclick="registerDirection()" >Impact</button>
@@ -41,6 +57,8 @@
 	<br>
 	<button class="button" onclick="onGoToReport()" >Report</button>
 </div>
+
+<div id="countdownTimer"></div>
 
 <div id="results">
 	/* send_swing_command Results go here. */

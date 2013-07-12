@@ -1,10 +1,18 @@
 window.onload = function()
 {
+	var status = getParameterByName("status")
+	if (status == "toolong") {
+		document.getElementById("results").innerHTML = "Sorry, you took too long to take your shot";
+		return;
+	}
+
 	var shotID = sessionStorage.getItem("shotID");
 	if (!shotID)
 	{
-		shotID = 136;
+		document.getElementById("results").innerHTML = "ShotID not good";
+		return;
 	}
+
 	var url = "shots/" + shotID + ".json";
 	doGetRequest(url, onGotShot);
 

@@ -5,11 +5,12 @@
 	
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="golflabs.css">	
+	<link rel="stylesheet" href="swing_ctl.css">	
 
 
 	<script src="utils.js"></script>
 	<script src="intro.js"></script>
-	<script type="text/javascript" src="http://robotcam.click2stream.com/?type=javascript&amp;width=320&amp;height=240"></script>
+	<script type="text/javascript" src="http://robotcam.click2stream.com/?type=javascript&amp;width=160&amp;height=120"></script>
 
 </head>
 
@@ -17,7 +18,25 @@
 
 	<div id="player_robotcam"></div>
 
+	<div id="framSwingTest">
+		<div id="swingControlFrame">
+			<div id="divSwingControlBackground"></div>
+			<div id="divPointer"></div>
+		</div>
+		<div id="divButtons">
+			<button id="swingButton" class="button" onclick="processButtonClick()" >Swing</button>
+			<br>
+			<button class="button" onclick="onReset()" >Reset</button>
+			<br>
+			<div id="feedback"></div>
+		</div>
+	</div>
+
 	<div>Instructions go here</div>
+
+	<div>Practice Swing</div>
+
+	<div id="countdownTimer"></div>
 
 	<button onclick="onGoNext()">Next Page</button>
 
