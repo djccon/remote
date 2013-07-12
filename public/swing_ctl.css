@@ -66,8 +66,8 @@
 	margin: 0px;
 	padding: 0px;
 	border: 0px solid black;
-	-moz-transform: translate(50px, 50px) rotate(0deg); 
-	-webkit-transform: translate(50px, 50px) rotate(0deg);
+	-moz-transform: translate(49px, 49px) rotate(0deg); 
+	-webkit-transform: translate(49px, 40px) rotate(0deg);
 	-moz-transform-origin:75% 0%; 
 	-webkit-transform-origin:75% 0%; 	
 }

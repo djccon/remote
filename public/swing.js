@@ -3,7 +3,7 @@
 window.onload = function () 
 {
 	startWeatherTimer();
-	startCountdownTimer(10, countdownCallback);
+	startCountdownTimer(30, countdownCallback);
 }
 
 
@@ -17,9 +17,11 @@ var doingDownswing = false;
 var power = 0;
 var direction = 0;
 var clubTranslation = "translate(60px, 50px)";
-var weatherTranslation = "translate(50px, 50px)";
+var weatherTranslation = "translate(49px, 49px)";
 var weatherCount = 0;
 var lastCommandObj = null;
+var getRandomWeather = false;
+
 
 function startSwing()
 {
@@ -83,6 +85,7 @@ function registerDirection()
 	
 	//alert('Direction registered')
 	
+	stopCountdownTimer();
 	sendCommandToServer();
 	
 }
@@ -105,8 +108,6 @@ function processButtonClick()
 
 function sendCommandToServer()
 {
-	return;
-
 	var url = "api/send_swing_command";
 
 	var request = new XMLHttpRequest();
@@ -120,7 +121,7 @@ function sendCommandToServer()
 	power = 151 + power;
 	direction = 10501 + direction;
 
-	document.getElementById("debug").value = "pwr: " + power + ", dir: " + direction;
+	document.getElementById("debug").innerHTML = "pwr: " + power + ", dir: " + direction;
 
 	var params = "power=" + power + "&direction=" + direction;
 
@@ -168,19 +169,30 @@ function onGetWeather()
 function getWeather()
 {
 	var url = "api/get_latest_weather";
+	if (getRandomWeather)
+	{
+		url += "?random=1";
+	}
 	doGetRequest(url, onGotWeather);
 }
 
 function onGotWeather(response)
 {
+	weatherCount++;
 	//var stringResponse = (JSON.stringify(response, null, 4);
 	//document.getElementById("weather").innerHTML = stringResponse ;
 
 	var weatherObj = response.data;
-
-	document.getElementById("weather").innerHTML = weatherCount 
+	var message = weatherCount 
 		+ " -> Speed: " + weatherObj.wind_speed 
 		+ ", Direction: " + weatherObj.wind_direction;
+
+	if (getRandomWeather)
+	{
+		message += " RANDOM";
+	}
+
+	document.getElementById("weather").innerHTML = message;
 
 	document.getElementById("divWindSpeed").innerHTML = weatherObj.wind_speed + "mph";
 
@@ -208,7 +220,7 @@ function onReset ()
 	
 	count = 0;
 	
-	document.getElementById("debug").value = "";
+	document.getElementById("debug").innerHTML = "";
 	var rotateString = "rotate(" + (0 - count) + "deg)";
 	document.getElementById("divPointer").style.MozTransform = clubTranslation + " " + rotateString;
 	document.getElementById("divPointer").style.WebkitTransform = clubTranslation + " " + rotateString;

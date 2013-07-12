@@ -40,22 +40,23 @@
 
 <div id="launchData">
 	<!-- launch data programmatically put here -->
-	Launch Data Here
+	
 </div>
 
 <div id="divButtons">
 	<button id="swingButton" class="button" onclick="processButtonClick()" >Swing</button>
 	<br>
+	<button class="button" onclick="onReset()" >Reset</button>
+	
+<!--
 	<button id="startButton" class="button" onclick="startSwing()" >Takeaway</button>
 	<button class="button" onclick="registerPower()" >Top</button>
 	<button class="button" onclick="registerDirection()" >Impact</button>
 	<br>
-	<button class="button" onclick="onReset()" >Reset</button>
 	<button class="button" onclick="onGetWeather()" >Get Weather</button>
 	<br>
-	<input id="debug" value="debug">
-	<br>
 	<button class="button" onclick="onGoToReport()" >Report</button>
+-->
 </div>
 
 <div id="countdownTimer"></div>
@@ -63,6 +64,8 @@
 <div id="results">
 	/* send_swing_command Results go here. */
 </div>
+
+<div id="debug"></div>
 
 </body>
 </html>

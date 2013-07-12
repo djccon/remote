@@ -1,7 +1,7 @@
 
 window.onload = function () 
 {
-	startCountdownTimer(10, countdownCallback);
+	startCountdownTimer(30, countdownCallback);
 }
 
 
