@@ -2,6 +2,7 @@
 window.onload = function () 
 {
 	startCountdownTimer(30, countdownCallback);
+	var user_id = sessionStorage.getItem("user_id");
 }
 
 

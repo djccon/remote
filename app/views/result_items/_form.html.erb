@@ -1,0 +1,29 @@
+<%= form_for(@result_item) do |f| %>
+  <% if @result_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@result_item.errors.count, "error") %> prohibited this result_item from being saved:</h2>
+
+      <ul>
+      <% @result_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :shot_id %><br />
+    <%= f.number_field :shot_id %>
+  </div>
+  <div class="field">
+    <%= f.label :distance_from_hole %><br />
+    <%= f.text_field :distance_from_hole %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

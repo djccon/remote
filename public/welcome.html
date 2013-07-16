@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+	<meta charset="utf-8">
+
+	<script src="utils.js?"+Math.random()></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+	<script>
+
+	 jQuery(function  ($) {
+		//alert('Seriously its ready!' );
+		sessionStorage.setItem("user_id", "");
+		$("#go").bind("click", onClickGo);
+	 });
+
+	 function onClickGo()
+	 {
+	 	var objToSend = {};
+	 	objToSend.name = $("#name").val();
+	 	objToSend.email = $("#email").val();
+
+	 	if (!objToSend.name || !objToSend.email)
+	 	{
+	 		alert("We need both name and email.Thanks!");
+	 		return;
+	 	}
+	 	
+	 	$.ajax({
+		  type: "POST",
+		  url: "users.json",
+		  data: { user:objToSend}
+		}).done(function( msg ) {
+		  //alert( "Data Saved: " + JSON.stringify(msg) );
+		  $("#debug").html("Data Saved: " + JSON.stringify(msg));
+		  sessionStorage.setItem("user_id", msg.id);
+		  redirectTo("intro.html");
+		});
+	 }
+
+	</script>
+
+</head>
+
+<body>
+
+<input id="name"></input>
+<input id="email"></input>
+<button id="go" >Register</button>
+
+<div id="debug"></div>
+
+</body>
+</html>
+
+<!--
+		$("#go").bind({
+			
+click:function(){
+				alert("here we go");
+				
+			});
+
+		} 
+-->
+

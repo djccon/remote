@@ -1,9 +1,10 @@
-
+var user_id = -1;
 
 window.onload = function () 
 {
 	startWeatherTimer();
 	startCountdownTimer(30, countdownCallback);
+	user_id = sessionStorage.getItem("user_id");
 }
 
 
@@ -301,9 +302,9 @@ function onGotShot(response)
 	var landing = landings[2];
 
 	if (landing) {
-
 		stopLaunchDataTimer();
-		goToReportPage(shot.id);
+		var distanceYds = calculateDistanceInYards (landing, 150);
+		sendResultToServer(user_id, shot.id, distanceYds);
 		
 	}
 }
@@ -324,5 +325,20 @@ function goToReportPage(shotID)
 	redirectTo("report.html");
 }
 
+function sendResultToServer(user_id, shot_id, distanceYds)
+{
+	var objToSend = {};
+ 	objToSend.user_id = user_id;
+ 	objToSend.shot_id = shot_id;
+ 	objToSend.distance_from_hole = distanceYds;
 
+ 	$.ajax({
+	  type: "POST",
+	  url: "result_items.json",
+	  data: { result_item:objToSend}
+	}).done(function( msg ) {
+	  //alert( "Data Saved: " + JSON.stringify(msg) );
+	  goToReportPage(shot_id);
+	});
+}
 

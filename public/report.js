@@ -9,19 +9,25 @@ window.onload = function()
 	var shotID = sessionStorage.getItem("shotID");
 	if (!shotID)
 	{
-		document.getElementById("results").innerHTML = "ShotID not good";
-		return;
+		shotID = getParameterByName("shot_id");
+		if (!shotID)
+		{
+			document.getElementById("results").innerHTML = "ShotID not good";
+			return;
+		}
 	}
 
 	var url = "shots/" + shotID + ".json";
 	doGetRequest(url, onGotShot);
 
 	document.getElementById("results").innerHTML = "Shot ID = " + shotID;
+
+	showLeaderboard();
 }
 
 function onGoToIntro()
 {
-	redirectTo("intro.html");
+	redirectTo("welcome.html");
 }
 
 function onGotShot(response)
@@ -54,22 +60,11 @@ function onGotShot(response)
     }
 	*/
 
-	var xdiff = landing.x - 137.16; // 150 yards in meters
-	var zdiff = landing.z - 0;
-
-	var distance = Math.sqrt((xdiff * xdiff) + (zdiff * zdiff));
-
-	var carryYds = landing.x * 1.0936;
-	var offlineYds = landing.z * 1.0936;
-	var distanceYds = distance * 1.0936;
+	var distanceYds = calculateDistanceInYards(landing, 150);
 
 	if (landing) {
-		var message = "You shot a distance of " 
-			+ Math.round(carryYds) + " yds and were off-line by " + Math.round(offlineYds) 
-			+ " yds. Total distance from hole: " + Math.round(distanceYds) + " yards";
+		var message = "Total distance from hole: " + Math.round(distanceYds) + " yards";
 		document.getElementById("results").innerHTML = message + "\n\n" + JSON.stringify(response, null, 4);
-		goToReportPage(shot.id);
-		
 	}
 }
 

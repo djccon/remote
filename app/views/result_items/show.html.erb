@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @result_item.user_id %>
+</p>
+
+<p>
+  <b>Shot:</b>
+  <%= @result_item.shot_id %>
+</p>
+
+<p>
+  <b>Distance from hole:</b>
+  <%= @result_item.distance_from_hole %>
+</p>
+
+
+<%= link_to 'Edit', edit_result_item_path(@result_item) %> |
+<%= link_to 'Back', result_items_path %>

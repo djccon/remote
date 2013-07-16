@@ -1,0 +1,108 @@
+rails generate scaffold Shot 
+
+rails generate scaffold Launch \
+club_speed:float \
+ball_speed:float \
+smash_factor:float \
+ball_horizontal_angle:float \
+ball_vertical_angle:float \
+dynamic_loft:float \
+face_angle:float \
+spin_rate:float \
+spin_axis_horizontal:float \
+spin_axis_vertical:float \
+club_path:float \
+attack_angle:float \
+swing_plane_horizontal:float \
+swing_plane_vertical:float 
+
+http://localhost:3000/api/send_shot_launch_conditions?club_speed=0.1&ball_speed=0.2&smash_factor=0.3&ball_horizontal_angle=0.4&ball_vertical_angle=1.4&dynamic_loft=0.5&face_angle=0.6&spin_rate=0.7&spin_axis_horizontal=0.8&spin_axis_vertical=0.9&club_path=1.0&attack_angle=1.1&swing_plane_horizontal=1.2&swing_plane_vertical=1.3
+
+
+public bool Valid = false;
+        public double ClubSpeed = 0.0;
+        public double BallSpeed = 0.0;
+        public double SmashFactor = 0.0;
+        public double BallHorizontalAngle = 0.0;
+        public double BallVerticalAngle = 0.0;
+        public double DynamicLoft = 0.0;
+        public double FaceAngle = 0.0;
+        public double SpinRate = 0.0;
+        public double SpinAxisHorizontal = 0.0;
+        public double SpinAxisVertical = 0.0;
+        public double ClubPath = 0.0;
+        public double AttackAngle = 0.0;
+        public double SwingPlaneHorizontal = 0.0;
+        public double SwingPlaneVertical = 0.0;  
+
+
+# BallLanding
+public bool Valid = false;
+		public double Time = 0.0;
+		public double X = 0.0;
+		public double Y = 0.0;
+		public double Z = 0.0;
+		public double Carry = 0.0;
+		public double Side = 0.0;
+		public double VerticalAngle = 0.0;
+		public double HorizontalAngle = 0.0;
+		public double Speed = 0.0;
+
+rails generate scaffold BallLanding \
+time:float \
+x:float \
+y:float \
+z:float \
+carry:float \
+side:float \
+vertical_angle:float \
+horizontal_angle:float \
+speed:float
+
+http://localhost:3000/api/send_shot_launch_conditions?club_speed=0.1&ball_speed=0.2&smash_factor=0.3&ball_horizontal_angle=0.4&ball_vertical_angle=1.4&dynamic_loft=0.5&face_angle=0.6&spin_rate=0.7&spin_axis_horizontal=0.8&spin_axis_vertical=0.9&club_path=1.0&attack_angle=1.1&swing_plane_horizontal=1.2&swing_plane_vertical=1.3
+
+
+rails generate scaffold LaunchItem shot_id:integer launch_id:integer
+
+rails generate scaffold BallLandingItem shot_id:integer ball_landing_id:integer
+
+rails generate scaffold CommandItem shot_id:integer command_id:integer
+
+rails generate migration RemoveValidFromBallLanding valid:boolean
+
+rails generate scaffold Weather wind_speed:float wind_direction:float
+rails generate scaffold WeatherItem shot_id:integer weather_id:integer
+
+# Ball Flight
+        #public double first_measurement_time = 0.0; 
+        #public double last_measurement_time = 0.03672614;
+        #public List<Position3D> positions = null;
+
+rails generate scaffold BallFlight \
+first_measurement_time:float \
+last_measurement_time:float \
+positions:text
+
+rails generate scaffold BallFlightItem shot_id:integer ball_flight_id:integer
+
+# Club Path
+
+rails generate scaffold ClubPath \
+first_measurement_time:float \
+last_measurement_time:float \
+positions:text
+
+rails generate scaffold ClubPathItem shot_id:integer club_path_id:integer
+
+rails generate migration AddTypeToWeather type:string
+rails generate migration RemoveTypeFromWeather type:string
+rails generate migration AddWeatherTypeToWeather weather_type:string
+
+UPDATE weathers SET type='old';
+
+rails generate scaffold ClubPathItem shot_id:integer club_path_id:integer
+
+rails generate scaffold User name:string email:string
+
+rails generate scaffold ResultItem user_id:integer shot_id:integer distance_from_hole:float 
+

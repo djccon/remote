@@ -1,4 +1,10 @@
 Remote::Application.routes.draw do
+  resources :result_items
+
+
+  resources :users
+
+
   resources :club_path_items
 
 
@@ -59,10 +65,9 @@ Remote::Application.routes.draw do
   get "api/push_command_block"
   get "api/get_latest_weather"
   get "api/get_command_item"
-
-  post "api/output_debug_string"
-
-  post "api/mimic_params"
+  get "api/get_leaderboard"
+  get "api/get_score_history"
+  get "api/send_email"
 
   put "api/send_swing_command"
   
@@ -73,6 +78,9 @@ Remote::Application.routes.draw do
   post "api/send_shot_club_path"
   post "api/send_weather"
   post "api/create_shot"
+  post "api/output_debug_string"
+  post "api/mimic_params"
+
 
 
   # The priority is based upon order of creation:

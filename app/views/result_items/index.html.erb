@@ -1,0 +1,27 @@
+<h1>Listing result_items</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Shot</th>
+    <th>Distance from hole</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @result_items.each do |result_item| %>
+  <tr>
+    <td><%= result_item.user_id %></td>
+    <td><%= result_item.shot_id %></td>
+    <td><%= result_item.distance_from_hole %></td>
+    <td><%= link_to 'Show', result_item %></td>
+    <td><%= link_to 'Edit', edit_result_item_path(result_item) %></td>
+    <td><%= link_to 'Destroy', result_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Result item', new_result_item_path %>

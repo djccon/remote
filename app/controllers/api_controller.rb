@@ -456,5 +456,41 @@ class ApiController < ApplicationController
     render json: response  
   end
 
+  def get_leaderboard
+    response = Hash.new
 
+    #top_results = ResultItem.order("distance_from_hole ASC").first(25)
+    #top_results = ResultItem.joins(:users);
+    top_results = ResultItem.find_by_sql("SELECT * FROM result_items INNER JOIN users ON users.id = result_items.user_id ORDER BY result_items.distance_from_hole asc")
+    response[:data] = top_results;
+
+    response[:status] = 'ok';
+    render json: response  
+  end
+
+
+  def get_score_history
+    response = Hash.new
+
+    user_id = params[:user_id]
+
+    top_results = ResultItem.where(user_id: user_id).order("distance_from_hole ASC").first(10)
+    response[:data] = top_results;
+
+    response[:status] = 'ok';
+    render json: response  
+  end
+
+  def send_email
+    response = Hash.new
+    
+    require 'mandrill'
+    
+    m = Mandrill::API.new # All official Mandrill API clients will automatically pull your API key from the environment
+    rendered = m.templates.render 'MyTemplate', [{:name => 'main', :content => 'The main content block'}]
+    puts rendered['html'] # print out the rendered HTML
+
+    response[:status] = 'ok';
+    render json: response  
+  end
 end
