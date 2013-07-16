@@ -1,3 +1,6 @@
+var baseUrl = "https://mandrillapp.com/api/1.0/";
+
+
 function redirectTo(sUrl) 
 {
 	window.location = sUrl + "?rand=" + Math.random();
@@ -91,6 +94,35 @@ function onCountdownTimer()
 	});
  }
 
+
+
+
+function sendEmail (userName, userEmail, shotID)
+{
+	var o = {};
+ 	o.key = "p5FiV5GwZNPZrb1l-vE6vA";
+ 	o.message = {};
+ 	o.message.html = "<b>Hello! <a href=\"http://immense-waters-5709.herokuapp.com/report.html?shot_id=" + shotID + "\">Here is your Golf Labs Hole in One Challenge Shot</a></b>";
+ 	o.message.text = "";
+ 	o.message.subject = "Testing from HTML";
+ 	o.message.from_email = "paul@chucklebug.com";
+ 	o.message.from_name = "Golf Labs";
+ 	o.message.to = [{email:userEmail, name:userName}];
+ 	
+	/* Send the data using post */
+	var posting = $.post( baseUrl + "/messages/send.json", o );
+ 
+  	/* Put the results in a div */
+  	posting.done(function( msg ) {
+    	$("#debug").html(JSON.stringify(msg));
+  	});
+
+  	/* Put the error in a div */
+  	posting.fail(function(error) {
+    	$("#debug").html("FAIL: " + JSON.stringify(error));
+  	});
+
+}
 
 
 function updateCountdownDisplay(timeleft)

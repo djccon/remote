@@ -17,43 +17,14 @@
 		$("#go").bind("click", onClickGo);
 	 });
 
-	 function onClickGo()
-	 {
-	 	var o = {};
-	 	o.key = "p5FiV5GwZNPZrb1l-vE6vA";
-	 	o.message = {};
-	 	o.message.html = "<b>Hello! <a href=\"http://immense-waters-5709.herokuapp.com/report.html?shot_id=30\">Here is your Golf Labs Hole in One Challenge Shot</a></b>";
-	 	o.message.text = "";
-	 	o.message.subject = "Testing from HTML";
-	 	o.message.from_email = "paul@chucklebug.com";
-	 	o.message.from_name = "Golf Labs";
-	 	o.message.to = [{email:"paul@fullsailstudios.com", name:"Paul Lamoreux"}];
-	 	
-
-	 // 	$.ajax({
-		//   type: "POST",
-		//   url: baseUrl + "/messages/send.json",
-		//   data: o
-		// }).done(function( msg ) {
-		//   //alert( "Data Saved: " + JSON.stringify(msg) );
-		//   $("#debug").html(JSON.stringify(msg));
-		// });
-
-
-		  /* Send the data using post */
-		var posting = $.post( baseUrl + "/messages/send.json", o );
-	 
-	  	/* Put the results in a div */
-	  	posting.done(function( msg ) {
-	    	$("#debug").html(JSON.stringify(msg));
-	  	});
-
-	  	/* Put the error in a div */
-	  	posting.fail(function(error) {
-	    	$("#debug").html("FAIL: " + JSON.stringify(error));
-	  	});
-
-	 }
+	function onClickGo()
+	{
+		var userName = $("#name").val();
+		var userEmail = $("#email").val();
+		var shotID = $("#shotid").val();
+		
+		sendEmail(userName, userEmail, shotID);
+	}
 
 	</script>
 
@@ -62,9 +33,11 @@
 <body>
 
 
-<input id="email"></input>
-<input id="message"></input>
-<button id="go" >Register</button>
+<div>Name: <input id="name"></input></div>
+<div>Email: <input id="email"></input></div>
+<div>ShotID: <input id="shotid"></input></div>
+
+<button id="go" >Send Report Email</button>
 
 <div id="debug"></div>
 

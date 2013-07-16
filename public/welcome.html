@@ -14,6 +14,7 @@
 	 jQuery(function  ($) {
 		//alert('Seriously its ready!' );
 		sessionStorage.setItem("user_id", "");
+		sessionStorage.setItem("user_name", "");
 		$("#go").bind("click", onClickGo);
 	 });
 
@@ -29,6 +30,9 @@
 	 		return;
 	 	}
 	 	
+		sessionStorage.setItem("user_name", objToSend.name);
+		sessionStorage.setItem("user_email", objToSend.email);
+		
 	 	$.ajax({
 		  type: "POST",
 		  url: "users.json",
