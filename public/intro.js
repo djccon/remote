@@ -3,6 +3,7 @@ window.onload = function ()
 {
 	startCountdownTimer(30, countdownCallback);
 	var user_id = sessionStorage.getItem("user_id");
+	showLeaderboard();
 }
 
 
@@ -31,6 +32,7 @@ function startSwing()
 	document.getElementById("divPointer").style.WebkitTransform = clubTranslation + " " + rotateString;	
 
 	timerID = setInterval ( "onTimer()", 10 );
+
 }
 
 // Click top of backswing

@@ -10,19 +10,35 @@
 
 	<script src="utils.js?"+Math.random()></script>
 	<script src="intro.js?"+Math.random()></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script type="text/javascript" src="http://robotcam.click2stream.com/?type=javascript&amp;width=160&amp;height=120"></script>
+
+<style>
+</style>
 
 </head>
 
 <body>
+<div class="main">
+	<header>
+		<h1><strong>Golf Labs</strong>HOLE IN 1 CHALLENGE</h1>
+	</header>
 
-	<div id="player_robotcam"></div>
+	<div id="leaderboard">
+		<h3>Leaderboard</h3>
+		<ol id="leaderlist">
+		</ol>
+	</div>
 
-	<div id="framSwingTest">
-		<div id="swingControlFrame">
-			<div id="divSwingControlBackground"></div>
-			<div id="divPointer"></div>
-		</div>
+	<div id="instructions">
+	<p>
+	<strong>INSTRUCTIONS </strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	</div>
+
+	
+	<div id="frameSwingTest">
+		<p>Practice Swing</p>
 		<div id="divButtons">
 			<button id="swingButton" class="button" onclick="processButtonClick()" >Swing</button>
 			<br>
@@ -30,15 +46,20 @@
 			<br>
 			<div id="feedback"></div>
 		</div>
+		<div id="swingControlFrame">
+			<div id="divSwingControlBackground"></div>
+			<div id="divPointer"></div>
+		</div>
 	</div>
 
-	<div>Instructions go here</div>
+	<div id="player_robotcam"></div>
 
-	<div>Practice Swing</div>
+
 
 	<div id="countdownTimer"></div>
 
 	<button onclick="onGoNext()">Next Page</button>
+</div>
 
 </body>
 

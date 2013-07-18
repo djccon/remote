@@ -38,9 +38,23 @@ function onGotShot(response)
 	var shot = response.shot;
 	var landings = response.ball_landings;
 	var landing;
+	var launches = response.launches;
+	var launch;
+	var weathers = response.weathers;
+	var weather;
 
 	if (landings) {
 		landing = landings[2];
+	}
+
+	if (launches)
+	{
+		launch = launches[0];
+	}
+
+	if (weathers)
+	{
+		weather = weathers[0];
 	}
 
 	/*
@@ -60,11 +74,51 @@ function onGotShot(response)
     }
 	*/
 
-	var distanceYds = calculateDistanceInYards(landing, 150);
-
 	if (landing) {
+		var distanceYds = calculateDistanceInYards(landing, 150);
+		addValueToPage("distanceToHole", "", distanceYds, " YARDS");
+		addLaunchDataToPage(launch);
+		addWeatherToPage(weather);
 		var message = "Total distance from hole: " + Math.round(distanceYds) + " yards";
 		document.getElementById("results").innerHTML = message + "\n\n" + JSON.stringify(response, null, 4);
 	}
 }
+
+function addValueToPage(id, label, distanceYds, units)
+{
+	var div = document.getElementById(id);
+	if (div)
+	{
+	  	var p = document.createElement("p");
+	  	
+	  		p.innerHTML = label + Math.round(distanceYds) + units;
+	  	
+	  	
+	  	div.appendChild(p);
+	}
+}
+
+function addLaunchDataToPage(launch)
+{
+	if (launch)
+	{
+		//document.getElementById("results").innerHTML = JSON.stringify(launch, null, 4);
+		addValueToPage("launchData", "Club Speed: ", Math.round(mpsToMph(launch.club_speed)), " mph");
+		addValueToPage("launchData", "Ball Speed: ", Math.round(mpsToMph(launch.ball_speed)), " mph");
+		addValueToPage("launchData", "Launch Angle: ", Math.round(launch.ball_vertical_angle), " degrees");
+		addValueToPage("launchData", "Back Spin: ", Math.round(rpsToRpm(launch.spin_rate)), " rpm");
+	}
+}
+
+
+function addWeatherToPage(launch)
+{
+	if (launch)
+	{
+		//document.getElementById("results").innerHTML = JSON.stringify(weather, null, 4);
+		addValueToPage("weather", "Wind Speed: ", Math.round(launch.wind_speed), " mph");
+		addValueToPage("weather", "Wind Direction: ", Math.round(launch.wind_direction), " degrees");
+	}
+}
+
 

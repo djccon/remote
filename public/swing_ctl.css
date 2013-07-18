@@ -1,3 +1,17 @@
+#frameSwingTest
+{
+	padding:0px;
+	position: relative;
+	border: 1px solid black;
+	background-color: white;
+	/*height: 250px;*/
+	width: 150px;
+	margin: 5px;
+
+	/*-moz-transform: translate(200px, -120px) ; 
+	-webkit-transform: translate(200px, -120px) ;*/
+}
+
 #swingControlFrame
 {
 	padding:5px;
