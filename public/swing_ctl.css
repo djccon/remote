@@ -7,7 +7,7 @@
 	/*height: 250px;*/
 	width: 150px;
 	margin: 5px;
-
+	box-shadow: 4px 4px 6px #000000;
 	/*-moz-transform: translate(200px, -120px) ; 
 	-webkit-transform: translate(200px, -120px) ;*/
 }
@@ -32,6 +32,7 @@
 	height: 100px;
 	width: 100px;
 	margin: 5px;
+	box-shadow: 4px 4px 6px #000000;
 }
 
 #divSwingControlBackground
