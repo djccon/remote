@@ -16,7 +16,7 @@ class ApiController < ApplicationController
   end
 
   def get_commands
-    # Get newest command from unprocessed commands
+    # Get newest command from unprocessed commands  
 
     response = Hash.new
     response[:status] = "ok"
@@ -286,7 +286,7 @@ class ApiController < ApplicationController
     flight = BallFlight.new do |obj|
         obj.first_measurement_time = actual_params["first_measurement_time"].to_f
         obj.last_measurement_time = actual_params["last_measurement_time"].to_f
-        obj.positions = actual_params["positions"].to_s
+        obj.positions = actual_params["positions"].to_json
     end
     flight.save
 
