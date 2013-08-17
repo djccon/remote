@@ -348,12 +348,14 @@ var baseUrl = "https://mandrillapp.com/api/1.0/";
 
 function sendEmail (userName, userEmail, shotID)
 {
+	return;
+	
 	var o = {};
  	o.key = "p5FiV5GwZNPZrb1l-vE6vA";
  	o.message = {};
  	o.message.html = "<b>Hello! <a href=\"http://immense-waters-5709.herokuapp.com/report.html?shot_id=" + shotID + "\">Here is your Golf Labs Hole in One Challenge Shot</a></b>";
  	o.message.text = "";
- 	o.message.subject = "Testing from HTML";
+ 	o.message.subject = "Golf Labs Hole In One Challenge Report";
  	o.message.from_email = "paul@chucklebug.com";
  	o.message.from_name = "Golf Labs";
  	o.message.to = [{email:userEmail, name:userName}];
