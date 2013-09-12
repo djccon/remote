@@ -1,0 +1,29 @@
+<h1>Listing live_xyzs</h1>
+
+<table>
+  <tr>
+    <th>X</th>
+    <th>Y</th>
+    <th>Z</th>
+    <th>Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @live_xyzs.each do |live_xyz| %>
+  <tr>
+    <td><%= live_xyz.x %></td>
+    <td><%= live_xyz.y %></td>
+    <td><%= live_xyz.z %></td>
+    <td><%= live_xyz.time %></td>
+    <td><%= link_to 'Show', live_xyz %></td>
+    <td><%= link_to 'Edit', edit_live_xyz_path(live_xyz) %></td>
+    <td><%= link_to 'Destroy', live_xyz, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Live xyz', new_live_xyz_path %>

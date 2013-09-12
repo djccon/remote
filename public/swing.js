@@ -4,8 +4,9 @@ var user_email = "";
 
 window.onload = function ()
 {
-	startWeatherTimer();
-	startCountdownTimer(30, countdownCallback);
+	//startWeatherTimer();
+	startLiveXYZTimer();
+	//startCountdownTimer(30, countdownCallback);
 	user_id = sessionStorage.getItem("user_id");
 	user_name = sessionStorage.getItem("user_name");
 	user_email = sessionStorage.getItem("user_email");
@@ -23,8 +24,10 @@ var direction = 0;
 var clubTranslation = "translate(60px, 50px)";
 var weatherTranslation = "translate(49px, 49px)";
 var weatherCount = 0;
+var liveXYZCount = 0;
 var lastCommandObj = null;
 var getRandomWeather = false;
+var getRandomLiveXYZData = false;
 
 
 function startSwing()
@@ -204,9 +207,41 @@ function onGotWeather(response)
 	document.getElementById("divWeatherPointer").style.MozTransform = weatherTranslation + " " + rotateString;
 	document.getElementById("divWeatherPointer").style.WebkitTransform = weatherTranslation + " " + rotateString;
 
-	
-
 	//document.getElementById("weather").innerHTML = weatherCount + " -> " + request.responseText;
+}
+
+function onGetLiveXYZDAta()
+{
+	getLiveXYZData();
+}
+
+function getLiveXYZData()
+{
+	var url = "api/get_live_xyz";
+	if (getRandomLiveXYZData)
+	{
+		url += "?random=1";
+	}
+	doGetRequest(url, onGotLiveXYZData);
+}
+
+function onGotLiveXYZData(response)
+{
+	liveXYZCount++;
+
+	var xyzObj = response.data;
+	var message = liveXYZCount 
+		+ " -> x: " + xyzObj.x 
+		+ ", y: " + xyzObj.y 
+		+ ", z: " + xyzObj.z;
+
+	if (getRandomLiveXYZData)
+	{
+		message += " RANDOM";
+	}
+
+	document.getElementById("liveXYZData").innerHTML = message;
+
 }
 
 function onReset ()
@@ -240,6 +275,19 @@ function onWeatherTimer()
 {
 	// grab weather
 	getWeather();
+}
+
+		
+function startLiveXYZTimer()
+{
+	getLiveXYZData();
+	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 50);
+}
+
+function onLiveXYZTimer()
+{
+	// grab live xyz
+	getLiveXYZData();
 }
 
 		

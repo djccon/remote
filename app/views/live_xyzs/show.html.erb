@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>X:</b>
+  <%= @live_xyz.x %>
+</p>
+
+<p>
+  <b>Y:</b>
+  <%= @live_xyz.y %>
+</p>
+
+<p>
+  <b>Z:</b>
+  <%= @live_xyz.z %>
+</p>
+
+<p>
+  <b>Time:</b>
+  <%= @live_xyz.time %>
+</p>
+
+
+<%= link_to 'Edit', edit_live_xyz_path(@live_xyz) %> |
+<%= link_to 'Back', live_xyzs_path %>

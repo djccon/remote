@@ -493,4 +493,47 @@ class ApiController < ApplicationController
     response[:status] = 'ok';
     render json: response  
   end
+
+  def get_live_xyz
+    response = Hash.new
+
+    xyzRecord = LiveXyz.first
+    if (xyzRecord.nil?)
+        response[:status] = 'na';
+        render json: response  
+        return 0
+    end
+    
+    xyz = Hash.new
+    xyz[:x] = xyzRecord.x
+    xyz[:y] = xyzRecord.y
+    xyz[:z] = xyzRecord.z
+
+    response[:data] = xyz
+
+    response[:status] = 'ok';
+    render json: response  
+  end
+
+  def set_live_xyz
+    response = Hash.new
+
+    json_payload = params[:payload]
+    actual_params = JSON.parse(json_payload)
+
+    xyzRecord = LiveXyz.first
+    if xyzRecord.nil?
+        xyzRecord = LiveXyz.new
+    end
+
+    xyzRecord.x = actual_params["x"].to_f
+    xyzRecord.y = actual_params["y"].to_f
+    xyzRecord.z = actual_params["z"].to_f
+
+    xyzRecord.save!
+    
+    response[:status] = 'ok';
+    render json: response  
+  end
+
 end

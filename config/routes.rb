@@ -1,4 +1,7 @@
 Remote::Application.routes.draw do
+  resources :live_xyzs
+
+
   resources :result_items
 
 
@@ -68,6 +71,8 @@ Remote::Application.routes.draw do
   get "api/get_leaderboard"
   get "api/get_score_history"
   get "api/send_email"
+  get "api/get_live_xyz"
+  post "api/set_live_xyz"
 
   put "api/send_swing_command"
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716113337) do
+ActiveRecord::Schema.define(:version => 20130912135832) do
 
   create_table "ball_flight_items", :force => true do |t|
     t.integer  "shot_id"
@@ -115,6 +115,15 @@ ActiveRecord::Schema.define(:version => 20130716113337) do
     t.float    "swing_plane_vertical"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+  end
+
+  create_table "live_xyzs", :force => true do |t|
+    t.float    "x"
+    t.float    "y"
+    t.float    "z"
+    t.float    "time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "responses", :force => true do |t|

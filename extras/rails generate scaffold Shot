@@ -106,3 +106,5 @@ rails generate scaffold User name:string email:string
 
 rails generate scaffold ResultItem user_id:integer shot_id:integer distance_from_hole:float 
 
+rails generate scaffold LiveXYZ x:float y:float z:float time:float 
+
