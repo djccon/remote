@@ -6,7 +6,7 @@ window.onload = function ()
 {
 	//startWeatherTimer();
 	startLiveXYZTimer();
-	//startCountdownTimer(30, countdownCallback);
+	startCountdownTimer(120, countdownCallback);  // DO NOT COMMENT OUT THIS LINE!
 	user_id = sessionStorage.getItem("user_id");
 	user_name = sessionStorage.getItem("user_name");
 	user_email = sessionStorage.getItem("user_email");
@@ -241,6 +241,7 @@ function onGotLiveXYZData(response)
 	}
 
 	document.getElementById("liveXYZData").innerHTML = message;
+	document.getElementById("liveXYZData").x = liveXYZCount;
 
 }
 
@@ -281,7 +282,7 @@ function onWeatherTimer()
 function startLiveXYZTimer()
 {
 	getLiveXYZData();
-	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 50);
+	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 500);
 }
 
 function onLiveXYZTimer()
@@ -340,6 +341,11 @@ function onGotCommandItem(response)
 	var commandItem = response.data;
 	document.getElementById("launchData").innerHTML = JSON.stringify(commandItem, null, 4);
 
+	if (!commandItem)
+	{
+		return;
+	}
+
 	var url = "shots/" + commandItem.shot_id + ".json";
 	doGetRequest(url, onGotShot);
 }
@@ -396,12 +402,13 @@ var baseUrl = "https://mandrillapp.com/api/1.0/";
 
 function sendEmail (userName, userEmail, shotID)
 {
+	goToReportPage(shotID);
 	return;
 	
 	var o = {};
  	o.key = "p5FiV5GwZNPZrb1l-vE6vA";
  	o.message = {};
- 	o.message.html = "<b>Hello! <a href=\"http://immense-waters-5709.herokuapp.com/report.html?shot_id=" + shotID + "\">Here is your Golf Labs Hole in One Challenge Shot</a></b>";
+ 	o.message.html = "<b>Hello! <a href=\"http://golflabs.chucklebug.com/report.html?shot_id=" + shotID + "\">Here is your Golf Labs Hole in One Challenge Shot</a></b>";
  	o.message.text = "";
  	o.message.subject = "Golf Labs Hole In One Challenge Report";
  	o.message.from_email = "paul@chucklebug.com";
