@@ -146,4 +146,54 @@ function rpsToRpm(rps)
     return rps * 30 / Math.PI;
 }
 
+function drawEllipseByCenter(ctx, cx, cy, w, h, color, fill) {
+  drawEllipse(ctx, cx - w/2.0, cy - h/2.0, w, h, color, fill);
+}
+
+function drawEllipse(ctx, x, y, w, h, color, fill) {
+  var kappa = .5522848,
+      ox = (w / 2) * kappa, // control point offset horizontal
+      oy = (h / 2) * kappa, // control point offset vertical
+      xe = x + w,           // x-end
+      ye = y + h,           // y-end
+      xm = x + w / 2,       // x-middle
+      ym = y + h / 2;       // y-middle
+
+
+
+  ctx.beginPath();
+  ctx.moveTo(x, ym);
+  ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
+  ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
+  ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
+  ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
+  ctx.closePath();
+  
+  if (fill)
+  {
+  	ctx.fillStyle = color;
+  	ctx.fill();
+  } else {
+  	ctx.strokeStyle = color;
+	ctx.stroke();
+  }
+}
+
+
+function drawCircle(context, x, y, radius, color, fill)
+{
+	context.beginPath();
+	context.arc(x, y, radius, 0, 2 * Math.PI, true);
+	
+	if (fill)
+	{
+		context.fillStyle = color;
+		context.fill();
+	} else {
+		context.strokeStyle = color;
+		context.stroke();
+	}
+}
+
+
 

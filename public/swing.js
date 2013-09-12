@@ -10,6 +10,7 @@ window.onload = function ()
 	user_id = sessionStorage.getItem("user_id");
 	user_name = sessionStorage.getItem("user_name");
 	user_email = sessionStorage.getItem("user_email");
+	paintGraphs();
 }
 
 var count = 0;
@@ -241,8 +242,7 @@ function onGotLiveXYZData(response)
 	}
 
 	document.getElementById("liveXYZData").innerHTML = message;
-	document.getElementById("liveXYZData").x = liveXYZCount;
-
+	addXYZtoGraphs(xyzObj);
 }
 
 function onReset ()
@@ -430,6 +430,115 @@ function sendEmail (userName, userEmail, shotID)
     	goToReportPage(shotID);
   	});
 
+}
+
+var canvas;
+var context;
+var canvasTop;
+var contextTop;
+var yOffset = 110;
+var scalar = 2.3;
+var sideOffset = 60;
+
+
+
+function paintGraphs()
+{
+	canvas = document.getElementById("ballFlightSide");
+	if (!canvas)
+	{
+		alert("Didn't get canvas");
+		return;
+	}
+
+	context = canvas.getContext("2d");
+	if (!context)
+	{
+		alert("Didn't get context");
+		return;
+	}
+
+	canvasTop = document.getElementById("ballFlightTop");
+	if (!canvasTop)
+	{
+		alert("Didn't get canvasTop");
+		return;
+	}
+
+	contextTop = canvasTop.getContext("2d");
+	if (!contextTop)
+	{
+		alert("Didn't get contextTop");
+		return;
+	}
+
+	context.fillStyle = "black";
+	contextTop.fillStyle = "white";
+
+	// Sky
+	context.fillStyle = "#1E90FF";
+	context.fillRect(0, 0, 500, yOffset);
+
+	// Hole
+	drawEllipseByCenter(context, scalar * 150, yOffset + 4, 12, 6, "black", true);
+	
+	// Flag
+	var flag = new Image();
+	flag.src = "images/golf-flag-sm.png";
+	flag.onload = function(){
+		//alert("flag loaded");
+		context.drawImage(flag, scalar * 150 - 3, yOffset - 95, 33, 100);
+	}
+	
+	// Top view target line
+	contextTop.fillStyle = "#00cc00";
+	contextTop.fillRect(0, sideOffset, 500, 1);
+
+	// Top view green
+	drawCircle(contextTop, scalar * 150, sideOffset, 35, "#009900", true);
+	drawCircle(contextTop, scalar * 150, sideOffset, 25, "#00cc00", true);
+	drawCircle(contextTop, scalar * 150, sideOffset, 5, "black", true);
+
+	drawCircle(contextTop, 0, sideOffset, scalar * 25, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 50, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 75, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 100, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 125, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 150, "#00cc00", false);
+	
+
+}
+
+
+function addXYZtoGraphs(position)
+{
+	
+	if (!context)
+	{
+		alert("Didn't get context");
+		return;
+	}
+
+	if (!contextTop)
+	{
+		alert("Didn't get contextTop");
+		return;
+	}
+
+	var x = metersToYards(position.x);
+	var y = metersToYards(position.y);
+	var z = metersToYards(position.z);
+	
+	context.beginPath();
+	context.arc(scalar * x, yOffset - scalar * y, 1, 0, 2 * Math.PI, true);
+	context.fillStyle = "black";
+	context.fill();
+
+	contextTop.beginPath();
+	contextTop.arc(scalar * x, sideOffset + scalar * z, 1, 0, 2 * Math.PI, true);
+	contextTop.fillStyle = "black";
+	contextTop.fill();
+	
 }
 
 
