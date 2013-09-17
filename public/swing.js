@@ -4,7 +4,7 @@ var user_email = "";
 
 window.onload = function ()
 {
-	//startWeatherTimer();
+	startWeatherTimer();
 	startLiveXYZTimer();
 	startCountdownTimer(120, countdownCallback);  // DO NOT COMMENT OUT THIS LINE!
 	user_id = sessionStorage.getItem("user_id");
@@ -282,7 +282,7 @@ function onWeatherTimer()
 function startLiveXYZTimer()
 {
 	getLiveXYZData();
-	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 50);
+	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 500);
 }
 
 function onLiveXYZTimer()
