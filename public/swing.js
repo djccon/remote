@@ -282,7 +282,7 @@ function onWeatherTimer()
 function startLiveXYZTimer()
 {
 	getLiveXYZData();
-	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 250);
+	liveXYZTimerID = setInterval ("onLiveXYZTimer()", 100);
 }
 
 function onLiveXYZTimer()
