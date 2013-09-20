@@ -437,13 +437,17 @@ var context;
 var canvasTop;
 var contextTop;
 var yOffset = 110;
-var scalar = 2.3;
+var scalar = 1.8;
 var sideOffset = 60;
 
 
 
 function paintGraphs()
 {
+	last_x = 0;
+	last_y = 0;
+	last_z = 0;
+
 	canvas = document.getElementById("ballFlightSide");
 	if (!canvas)
 	{
@@ -476,38 +480,47 @@ function paintGraphs()
 	contextTop.fillStyle = "white";
 
 	// Sky
-	context.fillStyle = "#1E90FF";
+	context.fillStyle = "white"; // #1E90FF";
 	context.fillRect(0, 0, 500, yOffset);
 
+	// ground line
+	context.fillStyle = "#cccccc";
+	context.fillRect(0, yOffset, 500, 1);
+
 	// Hole
-	drawEllipseByCenter(context, scalar * 150, yOffset + 4, 12, 6, "black", true);
+	drawEllipseByCenter(context, scalar * 150, yOffset + 4, 12, 6, "#ccc", false);
 	
 	// Flag
-	var flag = new Image();
-	flag.src = "images/golf-flag-sm.png";
-	flag.onload = function(){
-		//alert("flag loaded");
-		context.drawImage(flag, scalar * 150 - 3, yOffset - 95, 33, 100);
-	}
+	// var flag = new Image();
+	// flag.src = "images/golf-flag-sm.png";
+	// flag.onload = function(){
+	// 	//alert("flag loaded");
+	// 	context.drawImage(flag, scalar * 150 - 3, yOffset - 95, 33, 100);
+	// }
 	
 	// Top view target line
-	contextTop.fillStyle = "#00cc00";
+	contextTop.fillStyle = "#cccccc";
 	contextTop.fillRect(0, sideOffset, 500, 1);
 
 	// Top view green
-	drawCircle(contextTop, scalar * 150, sideOffset, 35, "#009900", true);
-	drawCircle(contextTop, scalar * 150, sideOffset, 25, "#00cc00", true);
-	drawCircle(contextTop, scalar * 150, sideOffset, 5, "black", true);
+	drawCircle(contextTop, scalar * 150, sideOffset, 35, "#ccc", false);
+	drawCircle(contextTop, scalar * 150, sideOffset, 25, "#ccc", false);
+	drawCircle(contextTop, scalar * 150, sideOffset, 5, "ccc", false);
 
-	drawCircle(contextTop, 0, sideOffset, scalar * 25, "#00cc00", false);
-	drawCircle(contextTop, 0, sideOffset, scalar * 50, "#00cc00", false);
-	drawCircle(contextTop, 0, sideOffset, scalar * 75, "#00cc00", false);
-	drawCircle(contextTop, 0, sideOffset, scalar * 100, "#00cc00", false);
-	drawCircle(contextTop, 0, sideOffset, scalar * 125, "#00cc00", false);
-	drawCircle(contextTop, 0, sideOffset, scalar * 150, "#00cc00", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 25, "#ccc", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 50, "#ccc", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 75, "#ccc", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 100, "#ccc", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 125, "#ccc", false);
+	drawCircle(contextTop, 0, sideOffset, scalar * 150, "#ccc", false);
 	
 
 }
+
+
+var last_x;
+var last_y;
+var last_z;
 
 
 function addXYZtoGraphs(position)
@@ -528,16 +541,37 @@ function addXYZtoGraphs(position)
 	var x = metersToYards(position.x);
 	var y = metersToYards(position.y);
 	var z = metersToYards(position.z);
-	
-	context.beginPath();
-	context.arc(scalar * x, yOffset - scalar * y, 1, 0, 2 * Math.PI, true);
-	context.fillStyle = "black";
-	context.fill();
 
+	if (x == 0)
+	{
+		return;
+	}
+	
+	// context.beginPath();
+	// context.arc(scalar * x, yOffset - scalar * y, 1, 0, 2 * Math.PI, true);
+	// context.fillStyle = "#666666";
+	// context.fill();
+
+	// contextTop.beginPath();
+	// contextTop.arc(scalar * x, sideOffset + scalar * z, 1, 0, 2 * Math.PI, true);
+	// contextTop.fillStyle = "#666666";
+	// contextTop.fill();
+
+	context.strokeStyle = "#666";
+	context.beginPath();
+	context.moveTo(scalar * last_x, yOffset - scalar * last_y);
+	context.lineTo(scalar * x, yOffset - scalar * y);
+	context.stroke();
+
+	contextTop.strokeStyle = "#666";
 	contextTop.beginPath();
-	contextTop.arc(scalar * x, sideOffset + scalar * z, 1, 0, 2 * Math.PI, true);
-	contextTop.fillStyle = "black";
-	contextTop.fill();
+	contextTop.moveTo(scalar * last_x, sideOffset + scalar * last_z);
+	contextTop.lineTo(scalar * x, sideOffset + scalar * z);
+	contextTop.stroke();
+
+	last_x = x;
+	last_y = y;
+	last_z = z;
 	
 }
 
