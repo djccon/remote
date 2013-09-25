@@ -98,7 +98,7 @@ function onCountdownTimer()
 
 function updateCountdownDisplay(timeleft)
 {
-	document.getElementById("countdownTimer").innerHTML = "Time left: " + timeleft;	
+	document.getElementById("countdownTimer").innerHTML = "" + timeleft + " SECONDS";	
 }
 
 function calculateDistanceInYards (landing, goalYds)

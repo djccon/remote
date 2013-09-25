@@ -27,11 +27,11 @@
 
 <style>
 	
-	#player_robotcam,#player_greencam
+	.camera_view,#player_greencam
 	{
 	padding:5px;
 	position: relative;
-	border: 5px solid black;
+	border: 1px solid black;
 	background-color: white;
 	width: 320px;
 	height: 240px;
@@ -43,121 +43,151 @@
 		border : 1px solid black;
 		background-color: white;
 	}
+
 </style>
 
 </head>
 
 <body>
 
-<div id="liveXYZData">
-	<!-- weather programmatically here -->
-	Live XYZ Data here
-</div>
-
-
 <div class="main">
 
 
 	<div class="row">
+		<div class="col-md-12"><div xclass="container">
+		<h1>HOLE IN ONE CHALLENGE</h1>
+		</div></div><!-- col-->
+	</div> <!-- row -->
 
-		<div class="col-md-4"><div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="timeRemainingSection" style="float: none; margin: 0 auto;" 	>
+				<span class="subtitle_left" >TIME REMAINING:</span><span class="subtitle_right"><span id="countdownTimer"></span></span>
+			</div>
+		</div><!-- col-->
+	</div> <!-- row -->
 
+	<div class="row">
 
-			<h1>Robot Cam</h1>
-
-			<div id="player_robotcam"></div>
-
-
-		</div></div><!--left col-->
-
-		<div class="col-md-4"><div class="container">
-			<h1>Swing Dial</h1>
-
-			<div id="frameSwingTest">
-				<p>Swing</p>
-				<div id="divButtons">
-					<button id="swingButton" class="button" onclick="processButtonClick()" >Swing</button>
-					<br>
-					<button class="button" onclick="onReset()" >Reset</button>
-					<br>
-					<div id="feedback"></div>
-				</div>
-				<div id="swingControlFrame">
+		<div class="col-md-3"><div xclass="container" class="text-center">
+			<div id="frameSwingTest" style="float: none; margin: 0 auto; text-align:center;" >
+				<div id="swingControlFrame" style="float: none; margin: 0 auto;">
 					<div id="divSwingControlBackground"></div>
 					<div id="divPointer"></div>
 				</div>
+				<div id="divButtons" style="float: none; margin: 0 auto;">
+					<button id="swingButton" xclass="button" onclick="processButtonClick()" >Swing</button>
+					<br>
+					<!-- button xclass="button" onclick="onReset()" >Reset</button>
+					<br -->
+					<div id="feedback"></div>
+				</div>
 			</div>
-		</div></div><!--middle col-->
+		</div></div><!-- col-->
+
+		<div class="col-md-4"><div xclass="container">
+			<h4>ROBOT</h4>
+			<div xid="player_robotcam" class="camera_view" style="float: none; margin: 0 auto;"></div>
+		</div></div><!-- col-->
+
+		<div class="col-md-4"><div xclass="container">
+			<h4>GREEN</h4>
+			<div id="player_greencam" style="float: none; margin: 0 auto;"></div>
+		</div></div><!-- col-->
+
+		<div class="col-md-1"><div xclass="container">
+		</div></div><!-- col-->
+	</div> <!-- row -->
+
+	
+	<div class="row">
+	
+		<div class="col-md-3"><div class="container" >
+			<!-- h4>Weather Info</h4 -->
+				<div id="weatherControlFrame" style="float: none; margin: 0 auto;">
+					<div id="divWeatherControlBackground"></div>
+					<div id="divWindSpeed"></div>
+					<div id="divWeatherPointer"></div>
+				</div>
+		</div></div><!-- col-->
 
 		<div class="col-md-4"><div class="container">
-			<h1>Green Cam</h1>
+			<h4>SIDE</h4>
+			<canvas class="ballFlightCanvas" id="ballFlightSide" width="300" height="120" ></canvas>
+		</div></div><!-- col-->
 
-			<div id="player_greencam"></div>
-		</div></div><!--right col-->
+		<div class="col-md-4"><div class="container">
+			<h4>TOP</h4>
+			<canvas class="ballFlightCanvas" id="ballFlightTop" width="300" height="120" ></canvas>
+		</div></div><!-- col-->
 
-
+		<div class="col-md-1"><div xclass="container">
+		</div></div><!-- col-->
 	</div> <!-- row -->
+
 
 	<div class="row">
 	
-		<div class="col-md-7"><div class="container">
-
-
-			Time Remaining
-
+		<div class="col-md-4"><div class="container" >
+			<h4>POWER AND DIRECTION</h4>
+			<div class="row">
 			
+				<div class="col-md-6"><div class="container" >
+					<div class="param-title">100%</div><div class="param-value">170 YDS</div>
+					<div class="param-title">70%</div><div class="param-value">130 YDS</div>
+					<div class="param-title">FULL HOOK</div><div class="param-value">60 FT LEFT</div>
+					<div class="param-title">FULL SLICE</div><div class="param-value">60 FT RIGHT</div>
+				</div></div><!-- col-->
 
-		</div></div><!--left col-->
+				<div class="col-md-6"><div >
+					
+					<p class="left-text">This is text that is telling about the hole and what things can happen.</p>
+				</div></div><!-- col-->
 
-		<div class="col-md-5"><div class="container">
-			04:00
+			</div> <!-- row -->
+		</div></div><!-- col-->
 
+		<div class="col-md-8"><div class="container">
+			<h4>HOLE DESCRIPTION</h4>
+
+			<div class="row">
 			
-		</div></div><!--middle col-->
+				<div class="col-md-1"><div class="container" >
+				</div></div><!-- col-->
 
+				<div class="col-md-5"><div class="container" >
+					<div id="scale-down" style="height: 400px">
+				    <img src="/images/golf_par3hole_top_2.jpg" alt="golf hole top view">
+				</div>
+				</div></div><!-- col-->
+
+				<div class="col-md-5"><div class="container">
+					<div class="param-title">DISTANCE</div><div class="param-value">152 yards to pin</div>
+					<div class="param-title">BACK OF GREEN</div><div class="param-value">164 yards</div>
+					<div class="param-title">FRONT OF GREEN</div><div class="param-value">145 yards</div>
+					<div class="param-title">GREEN DIMENSIONS</div><div class="param-value">20 yards wide</div><div class="param-value">25 yards deep</div>
+					<div class="param-title">GREEN SLOPE</div><div class="param-value">12 degrees</div>
+					<div class="param-title">GREEN MATERIAL</div><div class="param-value">BERMUDA</div>
+				</div></div><!-- col-->
+
+				<div class="col-md-1"><div class="container" >
+				</div></div><!-- col-->
+
+			</div> <!-- row -->
+
+
+		</div></div><!-- col-->
 
 	</div> <!-- row -->
 
-	<div class="row">
-	
-		<div class="col-md-6"><div class="container">
 
 
-			<canvas class="ballFlightCanvas" id="ballFlightSide" width="300" height="120"></canvas>
 
 
-		</div></div><!--left col-->
-
-		<div class="col-md-6"><div class="container">
-			<canvas class="ballFlightCanvas" id="ballFlightTop" width="300" height="120"></canvas>
-		</div></div><!--middle col-->
-
-
-	</div> <!-- row -->
-
-	<header>
-		<h1><strong>Golf Labs</strong></h1>
-		<h2>HOLE IN 1 CHALLENGE</h2>
-	</header>
-
-	
-	
-
-	
-
-<div id="frameWeatherTest">
-	<div id="weatherControlFrame">
-		<div id="divWeatherControlBackground"></div>
-		<div id="divWindSpeed"></div>
-		<div id="divWeatherPointer"></div>
-	</div>
+<div id="liveXYZData">
+	<!-- weather programmatically here -->
+	Live XYZ Data here
 </div>
-
-Robot Cam:
-
-
-Green Cam:
-
 
 <div id="weather">
 	<!-- weather programmatically here -->
@@ -185,7 +215,7 @@ Green Cam:
 -->
 <!-- </div> -->
 
-<div id="countdownTimer"></div>
+
 
 <div id="results">
 	/* send_swing_command Results go here. */

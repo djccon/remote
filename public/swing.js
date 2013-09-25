@@ -4,8 +4,8 @@ var user_email = "";
 
 window.onload = function ()
 {
-	startWeatherTimer();
-	startLiveXYZTimer();
+	//startWeatherTimer();
+	//startLiveXYZTimer();
 	startCountdownTimer(120, countdownCallback);  // DO NOT COMMENT OUT THIS LINE!
 	user_id = sessionStorage.getItem("user_id");
 	user_name = sessionStorage.getItem("user_name");
@@ -22,8 +22,8 @@ var doingBackswing = false;
 var doingDownswing = false;
 var power = 0;
 var direction = 0;
-var clubTranslation = "translate(60px, 50px)";
-var weatherTranslation = "translate(49px, 49px)";
+var clubTranslation = "translate(100px, 100px)";
+var weatherTranslation = "translate(69px, 49px)";
 var weatherCount = 0;
 var liveXYZCount = 0;
 var lastCommandObj = null;
@@ -439,7 +439,7 @@ var contextTop;
 var yOffset = 110;
 var scalar = 1.8;
 var sideOffset = 60;
-
+var width = 300;
 
 
 function paintGraphs()
@@ -481,11 +481,21 @@ function paintGraphs()
 
 	// Sky
 	context.fillStyle = "white"; // #1E90FF";
-	context.fillRect(0, 0, 500, yOffset);
+	context.fillRect(0, 0, width, yOffset);
 
-	// ground line
 	context.fillStyle = "#cccccc";
-	context.fillRect(0, yOffset, 500, 1);
+
+	// Horizontal Lines
+	// ground line
+	context.fillRect(0, yOffset, width, 1);
+	context.fillRect(0, yOffset - scalar * 15, width, 1);
+	context.fillRect(0, yOffset - scalar * 30, width, 1);
+	context.fillRect(0, yOffset - scalar * 45, width, 1);
+
+	// Vertical Lines
+	context.fillRect(0 + scalar * 50, 0, 1, yOffset);
+	context.fillRect(0 + scalar * 100, 0, 1, yOffset);
+	context.fillRect(0 + scalar * 150, 0, 1, yOffset);
 
 	// Hole
 	drawEllipseByCenter(context, scalar * 150, yOffset + 4, 12, 6, "#ccc", false);
@@ -500,12 +510,12 @@ function paintGraphs()
 	
 	// Top view target line
 	contextTop.fillStyle = "#cccccc";
-	contextTop.fillRect(0, sideOffset, 500, 1);
+	contextTop.fillRect(0, sideOffset, width, 1);
 
 	// Top view green
-	drawCircle(contextTop, scalar * 150, sideOffset, 35, "#ccc", false);
-	drawCircle(contextTop, scalar * 150, sideOffset, 25, "#ccc", false);
-	drawCircle(contextTop, scalar * 150, sideOffset, 5, "ccc", false);
+	drawCircle(contextTop, scalar * 150, sideOffset, 15 * scalar, "#ccc", false);
+	drawCircle(contextTop, scalar * 150, sideOffset, 10 * scalar, "#ccc", false);
+	drawCircle(contextTop, scalar * 150, sideOffset, 5 * scalar, "ccc", false);
 
 	drawCircle(contextTop, 0, sideOffset, scalar * 25, "#ccc", false);
 	drawCircle(contextTop, 0, sideOffset, scalar * 50, "#ccc", false);
@@ -557,13 +567,13 @@ function addXYZtoGraphs(position)
 	// contextTop.fillStyle = "#666666";
 	// contextTop.fill();
 
-	context.strokeStyle = "#666";
+	context.strokeStyle = "#000";
 	context.beginPath();
 	context.moveTo(scalar * last_x, yOffset - scalar * last_y);
 	context.lineTo(scalar * x, yOffset - scalar * y);
 	context.stroke();
 
-	contextTop.strokeStyle = "#666";
+	contextTop.strokeStyle = "#000";
 	contextTop.beginPath();
 	contextTop.moveTo(scalar * last_x, sideOffset + scalar * last_z);
 	contextTop.lineTo(scalar * x, sideOffset + scalar * z);
@@ -572,7 +582,6 @@ function addXYZtoGraphs(position)
 	last_x = x;
 	last_y = y;
 	last_z = z;
-	
 }
 
 

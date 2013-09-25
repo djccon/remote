@@ -32,23 +32,24 @@ table {
 
 	html
 	{
-		background: rgb(225,238,253) url(images/bg_body.png) repeat-x;
+		xbackground: rgb(225,238,253) url(images/bg_body.png) repeat-x;
 	}
 
 	.main
 	{
-		width: 740px; 
+		xwidth: 1000px; 
 		margin: 0 auto; 
 		padding: 0 10px; 
-		border: 4px solid white; 
-		background: transparent url(images/bg_banner.jpg) no-repeat;
+		xborder: 4px solid white; 
+		xbackground: transparent url(images/bg_banner.jpg) no-repeat;
 	}
 
 .main h1 {
-  color: rgb(252,102,0);
-  font-family: "Arial Black", Arial, Helvetica, sans-serif;
+  color: darkgrey;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 2em;
-  text-shadow: 4px 3px 6px rgba(0,0,0,.5);
+  text-align: center;
+  xtext-shadow: 4px 3px 6px rgba(0,0,0,.5);
 }
 
 .main h1 strong {
@@ -59,20 +60,55 @@ table {
 }
 
 .main h2 {
-	font: bold 3.5em "Arial Black", Arial, Helvetica, sans-serif;
+	font: bold 3.5em Arial, Helvetica, sans-serif;
 	color: white;
 	border-bottom: 1px solid rgb(200,200,200);
 	margin-top: -50px;
 }
 
 .main h3 {
-	font: bold 3.5em sans-serif;
+  font: bold 3.5em sans-serif;
   color: rgb(255,102,0);
   font-size: 1.2em;
   font-weight: bold;
   text-transform: uppercase;
   margin-top: 15px;
   margin-bottom: 10px;
+}
+
+.main h4 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+	text-align: center;
+  background-color: darkgrey;
+  margin: 5px 10% 5px 10%;
+}
+
+#timeRemainingSection
+{
+  background-color: black;
+}
+
+.subtitle_left
+{
+	text-align: right;
+  color: white;
+  background-color: darkgrey;
+  margin-right: 0px;
+  padding-right: 5px;
+  width: 50%;
+  float: left;
+}
+
+.subtitle_right
+{
+	text-align: left;
+  color: white;
+  background-color: black;
+  margin-left: 0px;
+  padding-left: 5px;
+  width: 50%;
+  float: right;
 }
 
 	body
@@ -141,6 +177,10 @@ table {
 		margin-top: 10px;
 	}
 
+.centeredContent  {
+	float: none; 
+	margin: 0 auto;
+}
 
 
 .button {
@@ -226,3 +266,60 @@ div
 {
 	white-space: pre;
 }
+
+.col-md-6,.col-md-12,.col-md-5,.col-md-2
+{
+  xborder: 1px solid rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.showBorder
+{
+  border: 1px solid cyan;
+}
+
+.row
+{
+  margin-top: 15px;
+}
+
+.param-title
+{
+  text-align: left;
+  color: darkgrey;
+}
+
+.param-value
+{
+  text-align: left;
+  margin-left: 10px;
+  color: black;
+}
+
+
+.left-text
+{
+  text-align: left;
+  color: darkgrey;
+}
+
+#hole-overhead
+{
+  background-image: url('images/swing_dial_bg_200.png'); 
+  padding:0px;
+  position: absolute;
+  border: 0px solid blue;
+  background-color: blue;
+  height: 199px;
+  width: 199px;
+}
+
+img {
+    vertical-align: middle;
+    height: 100%;
+}
+
+#scale-down {
+    height: 400px;
+}
+
