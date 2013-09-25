@@ -4,8 +4,8 @@ var user_email = "";
 
 window.onload = function ()
 {
-	//startWeatherTimer();
-	//startLiveXYZTimer();
+	startWeatherTimer();
+	startLiveXYZTimer();
 	startCountdownTimer(120, countdownCallback);  // DO NOT COMMENT OUT THIS LINE!
 	user_id = sessionStorage.getItem("user_id");
 	user_name = sessionStorage.getItem("user_name");

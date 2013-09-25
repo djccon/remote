@@ -5,32 +5,109 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="golflabs.css">	
 	
+	<!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+
 	<script src="utils.js?"+Math.random()></script>
 	<script src="report.js?"+Math.random()></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
-	<style>
-	.ballFlightCanvas
-	{
-		border : 2px solid black;
-		background-color: forestgreen;
-	}
-	</style>
 
 </head>
 
 <body>
 <div class="main">
-	<header>
-		<h1><strong>Golf Labs</strong></h1>
-		<h2>HOLE IN 1 CHALLENGE</h2>
-	</header>
+	<div class="row">
+		<div class="col-md-12"><div xclass="container">
+		<h1>STANDINGS</h1>
+		</div></div><!-- col-->
+	</div> <!-- row -->
 
+	<div class="row">
+		<div class="col-md-12">
+			<div id="timeRemainingSection" style="float: none; margin: 0 auto;" 	>
+				<span class="subtitle_left" >YOUR RANK:</span><span class="subtitle_right">14TH</span></span>
+			</div>
+		</div><!-- col-->
+	</div> <!-- row -->
+
+	<div class="row">
+	
+		<div class="col-md-1"><div class="container" >
+		</div></div><!-- col-->
+
+		<div class="col-md-5"><div class="container">
+			<h4>BALL FLIGHT - SIDE</h4>
+			<canvas class="ballFlightCanvas" id="ballFlightSide" width="300" height="120" ></canvas>
+		</div></div><!-- col-->
+
+		<div class="col-md-5"><div class="container">
+			<h4>BALL FLIGHT - TOP</h4>
+			<canvas class="ballFlightCanvas" id="ballFlightTop" width="300" height="120" ></canvas>
+		</div></div><!-- col-->
+
+		<div class="col-md-1"><div xclass="container">
+		</div></div><!-- col-->
+	</div> <!-- row -->
+
+
+	<div class="row">
+	
+		<div class="col-md-4"><div class="container" >
+			<h4>LAUNCH DATA</h4>
+			<div xclass="dataDisplay" id="launchData">
+				
+			</div>
+			
+		</div></div><!-- col-->
+
+		<div class="col-md-4"><div class="container" >
+			<h4>WEATHER</h4>
+			<div xclass="dataDisplay" id="weather">
+				
+			</div>
+		</div></div><!-- col-->
+
+		<div class="col-md-4"><div class="container" >
+			<h4>EQUIPMENT</h4>
+			<div class="param-title">CLUB</div><div class="param-value">Callaway X-20 8 Iron</div>
+			<div class="param-title">SHAFT</div><div class="param-value">True Temper 2300</div>
+			<div class="param-title">BALL</div><div class="param-value">Titleist Pro V1</div>
+		</div></div><!-- col-->
+
+
+	</div> <!-- row -->
+
+	<div class="row">
+	
+		<div class="col-md-2"><div class="container" >
+		</div></div><!-- col-->
+
+		<div class="col-md-8"><div class="container" >
+			<h4>LEADER BOARD</h4>
+			<div class="camera_view" style="float: none; margin: 0 auto;">
+				
+			</div>
+		</div></div><!-- col-->
+
+		<div class="col-md-2"><div class="container" >
+		</div></div><!-- col-->
+
+
+	</div> <!-- row -->
+	<!-- 
 	<div id="leaderboard">
 		<h3>Leaderboard</h3>
 		<ol id="leaderlist">
 		</ol>
 	</div>
+	-->
 
 	<!--div id="instructions">
 	<p>
@@ -38,32 +115,12 @@
 	</p>
 	</div -->
 
-	<div class="dataDisplay" id="distanceToHole">
-		<h3>DISTANCE TO HOLE</h3>
+	<div class="dataDisplay" xid="distanceToHole">
 	</div>
 
-	<div class="dataDisplay" id="launchData">
-		<h3>LAUNCH DATA</h3>
-	</div>
-
-	<div class="dataDisplay" id="weather">
-		<h3>WEATHER</h3>
-	</div>
-
-	<div class="dataDisplay" id="eqiupment">
-		<h3>EQUIPMENT</h3>
-		<p>Club: Club-Callaway X-20 8 iron</p> 
-		<p>Shaft: True Temper S300</p> 
-		<p>Ball: Titleist ProV1</p> 
-	</div>
-
-	<div class="dataDisplay" id="ballFlight">
-		<h3>BALL FLIGHT</h3>
-	</div>
-
-	<canvas class="ballFlightCanvas" id="ballFlightSide" width="400" height="120"></canvas>
-	<canvas class="ballFlightCanvas" id="ballFlightTop" width="400" height="120"></canvas>
-
+	<br />
+	<br />
+	<br />
 	<button onclick="onGoToIntro()">Back to Intro</button>
 
 	<div id="results">Results</div>
