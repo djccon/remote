@@ -80,8 +80,9 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
 	text-align: center;
-  background-color: darkgrey;
-  margin: 5px 10% 5px 10%;
+  background-color: #777;
+  xmargin: 5px 10% 5px 10%;
+  padding: 5px 10px;
 }
 
 #timeRemainingSection
@@ -110,6 +111,7 @@ table {
   width: 50%;
   float: right;
 }
+
 
 	body
 	{
@@ -275,7 +277,7 @@ div
 
 .showBorder
 {
-  border: 1px solid cyan;
+  border: 1px solid #777;
 }
 
 .row
@@ -315,9 +317,24 @@ div
   width: 199px;
 }
 
+#hole-overhead-black
+{
+  background-image: url('images/par4_top_black.png'); 
+  padding: 0px;
+  position: relative;
+  border: 0px solid blue;
+  height: 300px;
+  width: 111px;
+  margin-left: 30px;
+}
+
 img {
     vertical-align: middle;
     height: 100%;
+}
+
+#scale-down-200 {
+    height: 200px;
 }
 
 #scale-down {
@@ -333,7 +350,7 @@ img {
 
 .camera_view,#player_greencam
 {
-  padding:5px;
+  padding: 0px;
   position: relative;
   border: 1px solid black;
   background-color: white;
@@ -342,3 +359,79 @@ img {
   margin: 5px;
 }
 
+
+.camera_view_black
+{
+  padding: 0px;
+  position: relative;
+  border: 2px solid white;
+  background-color: black;
+  width: 320px;
+  height: 240px;
+  margin-top: 30px;
+}
+
+
+.padded-paragraph
+{
+  padding: 25px;
+  color: darkgrey;
+}
+
+ul
+{
+  list-style: none;  
+}
+
+.leader-list-item
+{
+  color: white;
+  background-color: white;
+  padding: 2px 0px;
+  margin: 0;
+}
+
+.leader_item_title
+{
+  text-align: left;
+  color: white;
+  background-color: #777;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 2px;
+  width: 70%;
+  float: left;
+
+}
+
+.leader_item_left
+{
+  text-align: left;
+  color: white;
+  background-color: lightgrey;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top: 2px;
+  width: 70%;
+  float: left;
+
+}
+
+.leader_item_right
+{
+  text-align: center;
+  color: white;
+  background-color: #777;
+  margin-top: 2px;
+  width: 29%;
+  float: right;
+}
+
+.black-background
+{
+  background-color: black;
+}

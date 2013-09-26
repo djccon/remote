@@ -1,8 +1,9 @@
 
 window.onload = function () 
 {
-	startCountdownTimer(30, countdownCallback);
+	startCountdownTimer(300, countdownCallback);
 	var user_id = sessionStorage.getItem("user_id");
+	document.getElementById("countdownTimer").innerHTML = "Calculating";
 	showLeaderboard();
 }
 
@@ -130,6 +131,8 @@ function processButtonClick()
 
 function countdownCallback()
 {
+	//alert("should go to next screen");
+	//return;
 	onGoNext();
 }
 

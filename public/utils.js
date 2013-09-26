@@ -83,12 +83,28 @@ function onCountdownTimer()
 	  // $("#debug").html("Item: " + JSON.stringify(msg));
 	  var items = msg.data;
 
+	  // <li class="leader-list-item"><span class="leader_item_title" >LEADERS</span><span class="leader_item_right">BEST</span></li>
 	  var ul = document.getElementById("leaderlist");
-	  for (var i = 0; i < items.length; i++)
+	  var max = items.length;
+	  if (max > 10) max = 10;
+
+	  for (var i = 0; i < max; i++)
 	  {
 	  	var resultItem = items[i];
 	  	var li = document.createElement("li");
-	  	li.innerHTML = Math.round(resultItem.distance_from_hole) + " Yards (" + resultItem.name + ")";
+	  	li.className = "leader-list-item";
+
+	  	var leftSpan = document.createElement("li");
+	  	leftSpan.className = "leader_item_left";
+	  	leftSpan.innerHTML = resultItem.name;
+
+	  	var rightSpan = document.createElement("li");
+	  	rightSpan.className = "leader_item_right";
+	  	rightSpan.innerHTML = Math.round(resultItem.distance_from_hole) + " Yards";
+
+	  	//li.innerHTML = Math.round(resultItem.distance_from_hole) + " Yards (" + resultItem.name + ")";
+	  	li.appendChild(leftSpan);
+	  	li.appendChild(rightSpan);
 	  	ul.appendChild(li);
 	  }
 	});
